@@ -25,7 +25,39 @@ class Patient(db.Model):
     def __repr__(self):
         return f'<Patient {self.name}>'
 
-class Diagnosis(db.Model):
+class ANC(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
+    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id', ondelete='CASCADE'), nullable=False)
+    created = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
+
+    expected_delivery_date = db.Column(db.Date, nullable=False)
+    last_menstrual_period = db.Column(db.Date, nullable=False)
+    height = db.Column(db.String(8), nullable=False)
+    weight = db.Column(db.String(8), nullable=False)
+    blood_pressure = db.Column(db.String(8), nullable=False)
+    gestation = db.Column(db.String(8), nullable=False)
+    parity = db.Column(db.String(8), nullable=False)
+    living_children = db.Column(db.String(8), nullable=False)
+    abortions = db.Column(db.String(8), nullable=False)
+    gravida = db.Column(db.String(8), nullable=False)
+
+    folic_acid = db.Column(db.Text, nullable=True)
+    mebendazole = db.Column(db.Text, nullable=True)
+    vaccination = db.Column(db.Text, nullable=True)
+    hiv = db.Column(db.Text, nullable=True)
+    syphilis = db.Column(db.Text, nullable=True)
+    Hepatitis = db.Column(db.Text, nullable=True)
+
+class LDR(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
+    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id', ondelete='CASCADE'), nullable=False)
+    created = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
+    category = db.Column(db.String(32), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+
+class PNC(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id', ondelete='CASCADE'), nullable=False)

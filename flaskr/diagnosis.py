@@ -5,14 +5,14 @@ from werkzeug.exceptions import abort
 from dotenv import load_dotenv
 
 from flaskr.auth import login_required
-from .models import Diagnosis, db
+from .models import ANC, LDR, PNC, db
 load_dotenv()
 
 bp = Blueprint('diagnosis', __name__)
 
-@bp.route('/add_diagnosis/<int:patient_id>', methods=('GET', 'POST'))
+@bp.route('/add_anc/<int:patient_id>', methods=('GET', 'POST'))
 @login_required
-def add_diagnosis(patient_id):
+def add_anc(patient_id):
     if request.method == 'POST':
         category = request.form['category']
         description = request.form['description']
@@ -26,7 +26,63 @@ def add_diagnosis(patient_id):
         if error is not None:
             flash(error)
         else:
-            new_diagnosis = Diagnosis(
+            new_diagnosis = ANC(
+                category=category,
+                description=description,
+                author_id=g.user.id,
+                patient_id=patient_id
+            )
+            db.session.add(new_diagnosis)
+            db.session.commit()
+            return redirect(url_for('patient.view_patient', patient_id=patient_id))
+
+    return render_template('diagnosis/add_diagnosis.html', patient_id=patient_id)
+
+@bp.route('/add_ldr/<int:patient_id>', methods=('GET', 'POST'))
+@login_required
+def add_ldr(patient_id):
+    if request.method == 'POST':
+        category = request.form['category']
+        description = request.form['description']
+        error = None
+
+        if not category:
+            error = 'Category is required.'
+        elif not description:
+            error = 'Description of Birth is required.'
+
+        if error is not None:
+            flash(error)
+        else:
+            new_diagnosis = LDR(
+                category=category,
+                description=description,
+                author_id=g.user.id,
+                patient_id=patient_id
+            )
+            db.session.add(new_diagnosis)
+            db.session.commit()
+            return redirect(url_for('patient.view_patient', patient_id=patient_id))
+
+    return render_template('diagnosis/add_diagnosis.html', patient_id=patient_id)
+
+@bp.route('/add_pnc/<int:patient_id>', methods=('GET', 'POST'))
+@login_required
+def add_pnc(patient_id):
+    if request.method == 'POST':
+        category = request.form['category']
+        description = request.form['description']
+        error = None
+
+        if not category:
+            error = 'Category is required.'
+        elif not description:
+            error = 'Description of Birth is required.'
+
+        if error is not None:
+            flash(error)
+        else:
+            new_diagnosis = PNC(
                 category=category,
                 description=description,
                 author_id=g.user.id,
@@ -56,7 +112,7 @@ def update_diagnosis(diagnosis_id):
         if error is not None:
             flash(error)
         else:
-            Diagnosis.query.filter_by(id=diagnosis_id).update(
+            ANC.query.filter_by(id=diagnosis_id).update(
                 {"category": category, "description": description}
             )
             db.session.commit()
@@ -68,7 +124,7 @@ def update_diagnosis(diagnosis_id):
 @login_required
 def delete_diagnosis(diagnosis_id):
     patient_id = get_diagnosis(diagnosis_id).patient_id
-    diagnosis_to_delete = Diagnosis.query.get(diagnosis_id)
+    diagnosis_to_delete = ANC.query.get(diagnosis_id)
 
     if diagnosis_to_delete:
         db.session.delete(diagnosis_to_delete)
@@ -80,7 +136,7 @@ def delete_diagnosis(diagnosis_id):
     return redirect(url_for('patient.view_patient', patient_id=patient_id))
 
 def get_diagnosis(diagnosis_id, check_author=True):
-    diagnosis = Diagnosis.query.get(diagnosis_id)
+    diagnosis = ANC.query.get(diagnosis_id)
 
     if diagnosis is None:
         abort(404, f"Patient id {diagnosis_id} doesn't exist.")

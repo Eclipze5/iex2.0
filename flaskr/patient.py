@@ -5,7 +5,7 @@ from werkzeug.exceptions import abort
 from dotenv import load_dotenv
 
 from flaskr.auth import login_required
-from .models import User, Patient, Diagnosis, db
+from .models import User, Patient, ANC, LDR, PNC, db
 from .pagination_collection import PaginationCollection
 load_dotenv()
 
@@ -92,15 +92,54 @@ def delete_patient(patient_id):
 @bp.route('/view/<int:patient_id>')
 @login_required
 def view_patient(patient_id):
-    builder = (
-        db.session.query(Diagnosis, User)
-        .filter(Diagnosis.patient_id == patient_id)
-        .join(User, Diagnosis.author_id == User.id)
-        .order_by(Diagnosis.created.desc())
+    anc_count = (
+        db.session.query(ANC, User)
+        .filter(ANC.patient_id == patient_id)
+        .count()
     )
+    ldr_count = (
+        db.session.query(LDR, User)
+        .filter(ANC.patient_id == patient_id)
+        .count()
+    )
+    pnc_count = (
+        db.session.query(PNC, User)
+        .filter(ANC.patient_id == patient_id)
+        .count()
+    )
+    return render_template('patient/view_patient.html', patient=get_patient(patient_id), anc_count=anc_count, ldr_count=ldr_count, pnc_count=pnc_count)
+
+@bp.route('/view/<int:patient_id>/<int:type>')
+@login_required
+def view_patient_diagnosis(patient_id, type):
+    if type == 0:
+        builder = (
+            db.session.query(ANC, User)
+            .filter(ANC.patient_id == patient_id)
+            .join(User, ANC.author_id == User.id)
+            .order_by(ANC.created.desc())
+        )
+    elif type == 1:
+        builder = (
+            db.session.query(LDR, User)
+            .filter(ANC.patient_id == patient_id)
+            .join(User, ANC.author_id == User.id)
+            .order_by(ANC.created.desc())
+        )
+    elif type == 2:
+        builder = (
+            db.session.query(PNC, User)
+            .filter(ANC.patient_id == patient_id)
+            .join(User, ANC.author_id == User.id)
+            .order_by(ANC.created.desc())
+        )
     page = request.args.get('page', type=int, default=1)
     pagination_collection = PaginationCollection(builder, page)
-    return render_template('patient/view_patient.html', patient=get_patient(patient_id), diagnosis=pagination_collection.items, pagination=pagination_collection.pagination)
+    return render_template('patient/view_patient_diagnosis.html',
+                           patient=get_patient(patient_id),
+                           diagnosis=pagination_collection.items,
+                           type=type,
+                           pagination=pagination_collection.pagination)
 
 def get_patient(patient_id):
     patient = Patient.query.get(patient_id)
