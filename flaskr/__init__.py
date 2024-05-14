@@ -5,14 +5,19 @@ from flaskr import auth, user, patient, diagnosis, main
 from .models import db
 from dotenv import load_dotenv
 
-migrate = Migrate()
-load_dotenv()
-
 # brew services start mysql
 # flask --app flaskr run --debug
 
+
+print("Loading environment variables...")
+load_dotenv()
+
+migrate = Migrate()
+
 def create_app(test_config=None):
-    # create and configure the app
+
+    print("Creating Flask app...")
+
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("SQLALCHEMY_DATABASE_URI")
     app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
@@ -34,6 +39,8 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    print("Registering blueprints...")
+
     app.register_blueprint(auth.bp)
     app.register_blueprint(user.bp)
     app.register_blueprint(patient.bp)
@@ -41,5 +48,7 @@ def create_app(test_config=None):
     app.register_blueprint(main.bp)
 
     app.add_url_rule('/', endpoint='index')
+
+    print("Flask app created.")
 
     return app
