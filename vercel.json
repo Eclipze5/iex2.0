@@ -1,5 +1,9 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/flaskr/api" }
+  "version": 2,
+  "builds": [
+    { "src": "/flaskr/api.py", "use": "@vercel/python" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/flaskr/api.py" }
   ]
 }
