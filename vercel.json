@@ -1,9 +1,9 @@
 {
   "version": 2,
   "builds": [
-    { "src": "/flaskr/api.py", "use": "@vercel/python" }
+    { "src": "/flaskr/api", "use": "@vercel/python" }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "/flaskr/api.py" }
+    { "src": "/(.*)", "dest": "/flaskr/api" }
   ]
 }
