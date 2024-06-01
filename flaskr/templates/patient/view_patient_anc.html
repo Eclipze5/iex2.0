@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <div class="row">
+    <div class="col-6">
+      <h1 class="fs2-text my-3">{% block title %}{{ patient['name'] }}{% endblock %}</h1>
+    </div>
+    <div class="col-6">
+      <div class="my-3 d-grid gap-2 d-flex justify-content-end">
+        <a class="btn btn-secondary" href="{{ url_for('patient.view_patient', patient_id=patient.id) }}">Back</a>
+        <a class="btn btn-primary" href="{{ url_for('diagnosis.add_anc_compulsory', patient_id=patient.id) }}">New Main Entry</a>
+        <a class="btn btn-primary" href="{{ url_for('diagnosis.add_anc_optional', patient_id=patient.id) }}">New Visit Update</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div>
+    <p>Expected Date of Delivery: {{ current_info['expected_delivery_date'] }}</p>
+    <p>Termination of Pregnancy: {{ current_info['terminate'] }}</p>
+    <p>Mother's Height: {{ current_info['height'] }}</p>
+    <p>Last Menstral Period: {{ current_info['last_menstrual_period'] }}</p>
+    <p>Parity: {{ current_info['parity'] }}</p>
+    <p>Number of Living Children: {{ current_info['living_children'] }}</p>
+    <p>Gravida: {{ current_info['gravida'] }}</p>
+  </div>
+  <div>
+  {% for d in diagnosis %}
+  <article class="patient">
+    <header>
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-8">
+              {% if d[0]['compulsory'] %}
+                <h3 class="fs2-text">Main Entry</h3>
+              {% else %}
+                <h3 class="fs2-text">Visit Update</h3>
+              {% endif %}
+            </div>
+            <div class="col-4">
+                <div class="d-grid gap-2 d-flex justify-content-end">
+                    {% if g.user.id == d[0].author_id %}
+                      <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.update_anc', diagnosis_id=d[0]['id']) }}">Edit</a>
+                    {% endif %}
+                    <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.view_anc', diagnosis_id=d[0]['id']) }}">View</a>
+                </div>
+            </div>
+          </div>
+
+          <div class="about">by {{ d[1]['username'] }} on {{ d[0]['created'].strftime('%Y-%m-%d') }}</div>
+        </div>
+      </div>
+    </header>
+  </article>
+  {% endfor %}
+  </div>
+  {{ pagination.links }}
+{% endblock %}

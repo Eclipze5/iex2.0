@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from flaskr.auth import login_required
 from .models import User, Patient, ANC, LDR, PNC, db
 from .pagination_collection import PaginationCollection
+from sqlalchemy import union_all
 load_dotenv()
 
 bp = Blueprint('patient', __name__)
@@ -93,46 +94,72 @@ def delete_patient(patient_id):
 @login_required
 def view_patient(patient_id):
     anc_count = (
-        db.session.query(ANC, User)
+        db.session.query(ANC)
         .filter(ANC.patient_id == patient_id)
         .count()
     )
     ldr_count = (
-        db.session.query(LDR, User)
-        .filter(ANC.patient_id == patient_id)
+        db.session.query(LDR)
+        .filter(LDR.patient_id == patient_id)
         .count()
     )
     pnc_count = (
-        db.session.query(PNC, User)
-        .filter(ANC.patient_id == patient_id)
+        db.session.query(PNC)
+        .filter(PNC.patient_id == patient_id)
         .count()
     )
     return render_template('patient/view_patient.html', patient=get_patient(patient_id), anc_count=anc_count, ldr_count=ldr_count, pnc_count=pnc_count)
 
-@bp.route('/view/<int:patient_id>/<int:type>')
+@bp.route('/view/<int:patient_id>/anc')
 @login_required
-def view_patient_diagnosis(patient_id, type):
-    if type == 0:
-        builder = (
-            db.session.query(ANC, User)
-            .filter(ANC.patient_id == patient_id)
-            .join(User, ANC.author_id == User.id)
-            .order_by(ANC.created.desc())
-        )
-    elif type == 1:
-        builder = (
-            db.session.query(LDR, User)
-            .filter(ANC.patient_id == patient_id)
-            .join(User, ANC.author_id == User.id)
-            .order_by(ANC.created.desc())
-        )
-    elif type == 2:
-        builder = (
-            db.session.query(PNC, User)
-            .filter(ANC.patient_id == patient_id)
-            .join(User, ANC.author_id == User.id)
-            .order_by(ANC.created.desc())
-        )
+def view_patient_anc(patient_id):
+    builder = (
+        db.session.query(ANC, User)
+        .filter(ANC.patient_id == patient_id)
+        .join(User, ANC.author_id == User.id)
+        .order_by(ANC.created.desc())
+    )
+    current_info = (
+        ANC.query.filter_by(compulsory=True)
+        .order_by(ANC.created.desc())
+        .first()
+    )
+    page = request.args.get('page', type=int, default=1)
+    pagination_collection = PaginationCollection(builder, page)
+    return render_template('patient/view_patient_anc.html',
+                           patient=get_patient(patient_id),
+                           diagnosis=pagination_collection.items,
+                           current_info=current_info,
+                           pagination=pagination_collection.pagination)
+
+@bp.route('/view/<int:patient_id>/ldr')
+@login_required
+def view_patient_ldr(patient_id):
+    builder = (
+        db.session.query(LDR, User)
+        .filter(LDR.patient_id == patient_id)
+        .join(User, LDR.author_id == User.id)
+        .order_by(LDR.created.desc())
+    )
+    page = request.args.get('page', type=int, default=1)
+    pagination_collection = PaginationCollection(builder, page)
+    return render_template('patient/view_patient_diagnosis.html',
+                           patient=get_patient(patient_id),
+                           diagnosis=pagination_collection.items,
+                           type=type,
+                           pagination=pagination_collection.pagination)
+
+
+
+@bp.route('/view/<int:patient_id>/pnc')
+@login_required
+def view_patient_pnc(patient_id):
+    builder = (
+        db.session.query(PNC, User)
+        .filter(PNC.patient_id == patient_id)
+        .join(User, PNC.author_id == User.id)
+        .order_by(PNC.created.desc())
+    )
     page = request.args.get('page', type=int, default=1)
     pagination_collection = PaginationCollection(builder, page)
     return render_template('patient/view_patient_diagnosis.html',

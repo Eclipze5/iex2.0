@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1 class="my-3">{% block title %}Add Diagnosis{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+
+    <div class="mb-3">
+      <label for="medical_surgical_complications" class="form-label">Medical and Surgical Complications</label>
+      <textarea name="medical_surgical_complications" class="form-control" id="medical_surgical_complications" rows="3">{{ request.form.get('medical_surgical_complications', default='') }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="obstetric_other_complications" class="form-label">Obstetric and Other Complications</label>
+      <textarea name="obstetric_other_complications" class="form-control" id="obstetric_other_complications" rows="3">{{ request.form.get('obstetric_other_complications', default='') }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="weight" class="form-label">Mother's Weight (kg)</label>
+      <input type="text" name="weight" class="form-control" id="weight" value="{{ request.form.get('weight', default='') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="gestation" class="form-label">Gestation (weeks)</label>
+      <input type="text" name="gestation" class="form-control" id="gestation" value="{{ request.form.get('gestation', default='') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="blood_pressure" class="form-label">Blood Pressure</label>
+      <input type="text" name="blood_pressure" class="form-control" id="blood_pressure" value="{{ request.form.get('blood_pressure', default='') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="fetal_assessment" class="form-label">Simple Assessment of Fetus</label>
+      <textarea name="fetal_assessment" class="form-control" id="fetal_assessment" rows="3">{{ request.form.get('fetal_assessment', default='') }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="fetal_heartbeat" class="form-label">Fetal Heartbeat</label>
+      <input type="text" name="fetal_heartbeat" class="form-control" id="fetal_heartbeat" value="{{ request.form.get('fetal_heartbeat', default='') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="symphysiofundal_height" class="form-label">Symphysiofundal Height</label>
+      <input type="text" name="symphysiofundal_height" class="form-control" id="symphysiofundal_height" value="{{ request.form.get('symphysiofundal_height', default='') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="complications" class="form-label">Complications</label>
+      <textarea name="complications" class="form-control" id="complications" rows="3">{{ request.form.get('complications', default='') }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="urine_dipstick" class="form-label">Urine Dipstick Test</label>
+      <input type="checkbox" name="urine_dipstick" id="urine_dipstick" value="true">
+    </div>
+
+    <div class="mb-3">
+      <label for="vaccination" class="form-label">Vaccination Administered</label>
+      <input type="checkbox" name="vaccination" id="vaccination" value="true">
+    </div>
+
+    <div class="mb-3">
+      <label for="folic_acid" class="form-label">Dispensed folic acid</label>
+      <input type="checkbox" name="folic_acid" id="folic_acid" value="true">
+    </div>
+
+    <div class="mb-3">
+      <label for="mendabazole" class="form-label">Dispensed mendabazole</label>
+      <input type="checkbox" name="mendabazole" id="mendabazole" value="true">
+    </div>
+
+    <div class="mb-3">
+      <label for="hepatitis" class="form-label">Hepatitis Test</label>
+      <input type="checkbox" name="hepatitis" id="hepatitis" value="true">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a class="btn btn-secondary" href="{{ url_for('patient.view_patient_anc', patient_id=patient_id) }}">Back</a>
+</form>
+{% endblock %}

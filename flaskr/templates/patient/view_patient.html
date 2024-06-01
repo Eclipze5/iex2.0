@@ -4,23 +4,23 @@
   <h1 class="fs2-text my-3">{% block title %}{{ patient['name'] }}{% endblock %}</h1>
 {% endblock %}
 
-  {% block content %}
-    <div>
-      <p>Sex: {{ patient['sex'] }}</p>
-      <p>DOB: {{ patient['date_of_birth'] }}</p>
-      <p>Phone: {{ patient['phone'] }}</p>
-      <p>Address: {{ patient['address'] }}</p>
-    </div>
+{% block content %}
+  <div>
+    <p>Sex: {{ patient['sex'] }}</p>
+    <p>DOB: {{ patient['date_of_birth'] }}</p>
+    <p>Phone: {{ patient['phone'] }}</p>
+    <p>Address: {{ patient['address'] }}</p>
+  </div>
 
-    <div class="row">
-      <div class="col-4">
-        <a class="btn btn-primary" href="{{ url_for('patient.view_patient_diagnosis', patient_id=patient.id, type=0) }}">Ante Natal Care ({{ anc_count }})</a>
-      </div>
-      <div class="col-4">
-        <a class="btn btn-primary" href="{{ url_for('patient.view_patient_diagnosis', patient_id=patient.id, type=1) }}">Labour and Delivery Records ({{ ldr_count }})</a>
-      </div>
-      <div class="col-4">
-        <a class="btn btn-primary" href="{{ url_for('patient.view_patient_diagnosis', patient_id=patient.id, type=2) }}">Post Natal Care ({{ pnc_count }})</a>
-      </div>
+  <div class="row">
+    <div class="col-4">
+      <a class="btn btn-primary" href="{{ url_for('patient.view_patient_anc', patient_id=patient.id) }}">Ante Natal Care ({{ anc_count }})</a>
     </div>
-  {% endblock %}
+    <div class="col-4">
+      <a class="btn btn-primary" href="{{ url_for('patient.view_patient_ldr', patient_id=patient.id) }}">Labour and Delivery Records ({{ ldr_count }})</a>
+    </div>
+    <div class="col-4">
+      <a class="btn btn-primary" href="{{ url_for('patient.view_patient_pnc', patient_id=patient.id) }}">Post Natal Care ({{ pnc_count }})</a>
+    </div>
+  </div>
+{% endblock %}

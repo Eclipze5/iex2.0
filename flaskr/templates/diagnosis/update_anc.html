@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1 class="my-3">{% block title %}{% if diagnosis['compulsory'] %}Edit Main Entry{% else %}Edit Visit Update{% endif %}{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    {% if diagnosis['compulsory'] %}
+
+      <div class="mb-3">
+        <label for="expected_delivery_date" class="form-label">Expected Date of Delivery</label>
+        <input type="date" name="expected_delivery_date" class="form-control" id="expected_delivery_date" required value="{{ request.form.get('expected_delivery_date') or diagnosis['expected_delivery_date'] }}">
+      </div>
+
+      <div class="mb-3">
+        <label for="terminate" class="form-label">Termination of Pregnancy</label>
+        <input type="checkbox" name="terminate" id="terminate" value="true" {{ 'checked' if diagnosis['terminate'] else '' }}>
+      </div>
+
+      <div class="mb-3">
+        <label for="height" class="form-label">Mother's Height (cm)</label>
+        <input type="text" name="height" class="form-control" id="height" reqired value="{{ request.form.get('height', default='') or diagnosis['height'] }}">
+      </div>
+
+      <div class="mb-3">
+        <label for="last_menstrual_period" class="form-label">Last Menstral Period</label>
+        <input type="date" name="last_menstrual_period" class="form-control" id="last_menstrual_period" required value="{{ request.form.get('last_menstrual_period') or diagnosis['last_menstrual_period'] }}">
+      </div>
+
+      <div class="mb-3">
+        <label for="parity" class="form-label">Parity</label>
+        <input type="text" name="parity" class="form-control" id="parity" reqired value="{{ request.form.get('parity', default='') or diagnosis['parity'] }}">
+      </div>
+
+      <div class="mb-3">
+        <label for="living_children" class="form-label">Number of Living Children</label>
+        <input type="text" name="living_children" class="form-control" id="living_children" reqired value="{{ request.form.get('living_children', default='') or diagnosis['living_children'] }}">
+      </div>
+
+      <div class="mb-3">
+        <label for="gravida" class="form-label">Gravida</label>
+        <input type="text" name="gravida" class="form-control" id="gravida" reqired value="{{ request.form.get('gravida', default='') or diagnosis['gravida'] }}">
+      </div>
+
+    {% else %}
+
+      <div class="mb-3">
+        <label for="medical_surgical_complications" class="form-label">Medical and Surgical Complications</label>
+        <textarea name="medical_surgical_complications" class="form-control" id="medical_surgical_complications" rows="3">{{ request.form.get('medical_surgical_complications', default='') or diagnosis['medical_surgical_complications'] }}</textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="obstetric_other_complications" class="form-label">Obstetric and Other Complications</label>
+        <textarea name="obstetric_other_complications" class="form-control" id="obstetric_other_complications" rows="3">{{ request.form.get('obstetric_other_complications', default='') or diagnosis['obstetric_other_complications'] }}</textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="weight" class="form-label">Mother's Weight (kg)</label>
+        <input type="text" name="weight" class="form-control" id="weight" value="{{ request.form.get('weight', default='') or diagnosis['weight'] }}">
+      </div>
+
+      <div class="mb-3">
+        <label for="gestation" class="form-label">Gestation (weeks)</label>
+        <input type="text" name="gestation" class="form-control" id="gestation" value="{{ request.form.get('gestation', default='') or diagnosis['gestation'] }}">
+      </div>
+
+      <div class="mb-3">
+        <label for="blood_pressure" class="form-label">Blood Pressure</label>
+        <input type="text" name="blood_pressure" class="form-control" id="blood_pressure" value="{{ request.form.get('blood_pressure', default='') or diagnosis['blood_pressure'] }}">
+      </div>
+
+      <div class="mb-3">
+        <label for="fetal_assessment" class="form-label">Simple Assessment of Fetus</label>
+        <textarea name="fetal_assessment" class="form-control" id="fetal_assessment" rows="3">{{ request.form.get('fetal_assessment', default='') or diagnosis['fetal_assessment'] }}</textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="fetal_heartbeat" class="form-label">Fetal Heartbeat</label>
+        <input type="text" name="fetal_heartbeat" class="form-control" id="fetal_heartbeat" value="{{ request.form.get('fetal_heartbeat', default='') or diagnosis['fetal_heartbeat'] }}">
+      </div>
+
+      <div class="mb-3">
+        <label for="symphysiofundal_height" class="form-label">Symphysiofundal Height</label>
+        <input type="text" name="symphysiofundal_height" class="form-control" id="symphysiofundal_height" value="{{ request.form.get('symphysiofundal_height', default='') or diagnosis['symphysiofundal_height'] }}">
+      </div>
+
+      <div class="mb-3">
+        <label for="complications" class="form-label">Complications</label>
+        <textarea name="complications" class="form-control" id="complications" rows="3">{{ request.form.get('complications', default='') or diagnosis['complications'] }}</textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="urine_dipstick" class="form-label">Urine Dipstick Test</label>
+        <input type="checkbox" name="urine_dipstick" id="urine_dipstick" value="true" {{ 'checked' if diagnosis['urine_dipstick'] else '' }}>
+      </div>
+
+      <div class="mb-3">
+        <label for="vaccination" class="form-label">Vaccination Administered</label>
+        <input type="checkbox" name="vaccination" id="vaccination" value="true" {{ 'checked' if diagnosis['vaccination'] else '' }}>
+      </div>
+
+      <div class="mb-3">
+        <label for="folic_acid" class="form-label">Dispensed folic acid</label>
+        <input type="checkbox" name="folic_acid" id="folic_acid" value="true" {{ 'checked' if diagnosis['folic_acid'] else '' }}>
+      </div>
+
+      <div class="mb-3">
+        <label for="mendabazole" class="form-label">Dispensed mendabazole</label>
+        <input type="checkbox" name="mendabazole" id="mendabazole" value="true" {{ 'checked' if diagnosis['mendabazole'] else '' }}>
+      </div>
+
+      <div class="mb-3">
+        <label for="hepatitis" class="form-label">Hepatitis Test</label>
+        <input type="checkbox" name="hepatitis" id="hepatitis" value="true" {{ 'checked' if diagnosis['hepatitis'] else '' }}>
+      </div>
+
+    {% endif %}
+
+
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a class="btn btn-secondary" href="{{ url_for('patient.view_patient_anc', patient_id=diagnosis['patient_id']) }}">Back</a>
+    <button id="delete_trigger" class="btn btn-danger float-end" type="submit" onclick="return deleteDiagnosis()">Delete</button>
+  </form>
+  <hr>
+
+  <form id="delete_form" action="{{ url_for('diagnosis.delete_anc', diagnosis_id=diagnosis['id']) }}" method="post">
+
+  </form>
+
+  <script>
+    deleteDiagnosis = () => {
+      if (confirm('Confirm to delete this diagnosis?')) {
+        document.getElementById('delete_form').submit();
+      }
+
+      return false;
+    }
+  </script>
+{% endblock %}

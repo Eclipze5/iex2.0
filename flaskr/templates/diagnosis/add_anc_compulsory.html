@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1 class="my-3">{% block title %}Add Diagnosis{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+
+    <div class="mb-3">
+      <label for="expected_delivery_date" class="form-label">Expected Date of Delivery</label>
+      <input type="date" name="expected_delivery_date" class="form-control" id="expected_delivery_date" required value="{{ request.form.get('expected_delivery_date') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="terminate" class="form-label">Termination of Pregnancy</label>
+      <input type="checkbox" name="terminate" id="terminate" value="true">
+    </div>
+
+    <div class="mb-3">
+      <label for="height" class="form-label">Mother's Height (cm)</label>
+      <input type="text" name="height" class="form-control" id="height" reqired value="{{ request.form.get('height', default='') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="last_menstrual_period" class="form-label">Last Menstral Period</label>
+      <input type="date" name="last_menstrual_period" class="form-control" id="last_menstrual_period" required value="{{ request.form.get('last_menstrual_period') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="parity" class="form-label">Parity</label>
+      <input type="text" name="parity" class="form-control" id="parity" reqired value="{{ request.form.get('parity', default='') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="living_children" class="form-label">Number of Living Children</label>
+      <input type="text" name="living_children" class="form-control" id="living_children" reqired value="{{ request.form.get('living_children', default='') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="gravida" class="form-label">Gravida</label>
+      <input type="text" name="gravida" class="form-control" id="gravida" reqired value="{{ request.form.get('gravida', default='') }}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a class="btn btn-secondary" href="{{ url_for('patient.view_patient_anc', patient_id=patient_id) }}">Back</a>
+</form>
+{% endblock %}
