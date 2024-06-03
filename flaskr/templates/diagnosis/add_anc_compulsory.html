@@ -42,7 +42,18 @@
       <input type="text" name="gravida" class="form-control" id="gravida" reqired value="{{ request.form.get('gravida', default='') }}">
     </div>
 
+    <div class="mb-3">
+      <label for="medical_surgical_complications" class="form-label">Medical and Surgical Complications</label>
+      <textarea name="medical_surgical_complications" class="form-control" id="medical_surgical_complications" rows="3">{{ request.form.get('medical_surgical_complications', default='') }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="obstetric_other_complications" class="form-label">Obstetric and Other Complications</label>
+      <textarea name="obstetric_other_complications" class="form-control" id="obstetric_other_complications" rows="3">{{ request.form.get('obstetric_other_complications', default='') }}</textarea>
+    </div>
+
     <button type="submit" class="btn btn-primary">Create</button>
     <a class="btn btn-secondary" href="{{ url_for('patient.view_patient_anc', patient_id=patient_id) }}">Back</a>
 </form>
+<hr>
 {% endblock %}

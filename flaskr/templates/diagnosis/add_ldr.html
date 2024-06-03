@@ -6,15 +6,160 @@
 
 {% block content %}
 <form method="post">
+
+    <h3 class="my-3">Labour and Delivery </h3>
+
     <div class="mb-3">
-      <label for="category" class="form-label">Category</label>
-      <input type="text" name="category" class="form-control" id="category" reqired value="{{ request.form.get('name', default='') }}">
+      <label for="labour_onset" class="form-label">Labour Onset</label>
+      <input type="date" name="labour_onset" class="form-control" id="labour_onset" required value="{{ request.form.get('labour_onset') }}">
     </div>
+
     <div class="mb-3">
-      <label for="description" class="form-label">Description</label>
-      <textarea name="description" class="form-control" id="description" rows="3">{{ request.form.get('description', default='') }}</textarea>
+      <label for="membranes_ruptured" class="form-label">Membranes Ruptured</label>
+      <input type="date" name="membranes_ruptured" class="form-control" id="membranes_ruptured" required value="{{ request.form.get('membranes_ruptured') }}">
     </div>
+
+    <div class="mb-3">
+      <label for="duration_2nd_stage" class="form-label">Duration of 2nd Stage</label>
+      <input type="text" name="duration_2nd_stage" class="form-control" id="duration_2nd_stage" reqired value="{{ request.form.get('duration_2nd_stage', default='') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="duration_3rd_stage" class="form-label">Duration of 3rd Stage</label>
+      <input type="text" name="duration_3rd_stage" class="form-control" id="duration_3rd_stage" reqired value="{{ request.form.get('duration_3rd_stage', default='') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="placenta_delivery" class="form-label">Sex</label>
+      <select id="placenta_delivery" name="placenta_delivery" class="form-select" >
+        <option value="spontaneous" {% if request.form.get('placenta_delivery', default='') == 'spontaneous' %} selected {% endif %}>Spontaneous</option>
+        <option value="brandt_andrew" {% if request.form.get('placenta_delivery', default='') == 'brandt_andrew' %} selected {% endif %}>Brandt Andrew</option>
+        <option value="mrp" {% if request.form.get('placenta_delivery', default='') == 'mrp' %} selected {% endif %}>MRP</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="placenta_complete" class="form-label">Placenta Complete</label>
+      <input type="checkbox" name="placenta_complete" id="placenta_complete" value="true">
+    </div>
+
+    <div class="mb-3">
+      <label for="membranes_complete" class="form-label">Membranes Complete</label>
+      <input type="checkbox" name="membranes_complete" id="membranes_complete" value="true">
+    </div>
+
+    <div class="mb-3">
+      <label for="placenta_weight" class="form-label">Placenta Weight (g)</label>
+      <input type="text" name="placenta_weight" class="form-control" id="placenta_weight" reqired value="{{ request.form.get('placenta_weight', default='') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="blood_loss" class="form-label">Blood Loss During Delivery (ml)</label>
+      <input type="text" name="blood_loss" class="form-control" id="blood_loss" reqired value="{{ request.form.get('blood_loss', default='') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="shoulder_dystocia" class="form-label">Shoulder Dystocia</label>
+      <input type="checkbox" name="shoulder_dystocia" id="shoulder_dystocia" value="true">
+    </div>
+
+    <div class="mb-3">
+      <label for="tear" class="form-label">3rd Degree Tear</label>
+      <input type="checkbox" name="tear" id="tear" value="true">
+    </div>
+
+    <div class="mb-3">
+      <label for="ulterine_rupture" class="form-label">Uterine Rupture</label>
+      <input type="checkbox" name="ulterine_rupture" id="ulterine_rupture" value="true">
+    </div>
+
+    <div class="mb-3">
+      <label for="obsteric_hysterectomy" class="form-label">Obsteric Hysterectomy</label>
+      <input type="checkbox" name="obsteric_hysterectomy" id="obsteric_hysterectomy" value="true">
+    </div>
+
+    <div class="mb-3">
+      <label for="comments" class="form-label">Other Comments</label>
+      <textarea name="comments" class="form-control" id="comments" rows="3">{{ request.form.get('comments', default='') }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="attendent" class="form-label">Attendants</label>
+      <textarea name="attendent" class="form-control" id="attendent" rows="3">{{ request.form.get('attendent', default='') }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="other_delivery_method" class="form-label">Other Delivery Method</label>
+      <select id="other_delivery_method" name="other_delivery_method" class="form-select" >
+        <option value="" {% if request.form.get('other_delivery_method', default='') == '' %} selected {% endif %}></option>
+        <option value="ambulance" {% if request.form.get('other_delivery_method', default='') == 'ambulance' %} selected {% endif %}>Ambulance Officer</option>
+        <option value="self_delivery" {% if request.form.get('other_delivery_method', default='') == 'self_delivery' %} selected {% endif %}>Self-delivery</option>
+        <option value="others" {% if request.form.get('other_delivery_method', default='') == 'others' %} selected {% endif %}>Others</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="delivery_liquor" class="form-label">Liquor at Delivery</label>
+      <select id="delivery_liquor" name="delivery_liquor" class="form-select" >
+        <option value="clear" {% if request.form.get('delivery_liquor', default='') == 'clear' %} selected {% endif %}>Clear</option>
+        <option value="meconium_stained" {% if request.form.get('delivery_liquor', default='') == 'meconium_stained' %} selected {% endif %}>Meconium Stained</option>
+        <option value="blood_stained" {% if request.form.get('delivery_liquor', default='') == 'blood_stained' %} selected {% endif %}>Blood Stained</option>
+      </select>
+    </div>
+
+    <hr>
+    <h3 class="my-3">Infant Information</h3>
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Name of Baby</label>
+      <input type="text" name="name" class="form-control" id="name" reqired value="{{ request.form.get('name', default='') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="delivery_date" class="form-label">Delivery Date</label>
+      <input type="date" class="form-control" id="delivery_date" name="delivery_date" required value="{{ request.form.get('delivery_date') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="sex" class="form-label">Sex of Baby</label>
+      <select id="sex" name="sex" class="form-select" >
+        <option value="male" {% if request.form.get('sex', default='') == 'male' %} selected {% endif %}>Male</option>
+        <option value="female" {% if request.form.get('sex', default='') == 'female' %} selected {% endif %}>Female</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="condition" class="form-label">Baby Condition</label>
+      <select id="condition" name="condition" class="form-select" >
+        <option value="live_birth" {% if request.form.get('condition', default='') == 'live_birth' %} selected {% endif %}>Live Birth</option>
+        <option value="stillbirth_macerated" {% if request.form.get('condition', default='') == 'stillbirth_macerated' %} selected {% endif %}>Stillbirth (Macerated)</option>
+        <option value="stillbirth_fresh" {% if request.form.get('condition', default='') == 'stillbirth_fresh' %} selected {% endif %}>Stillbirth (Fresh)</option>
+        <option value="abortus" {% if request.form.get('condition', default='') == 'abortus' %} selected {% endif %}>Abortus</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="weight" class="form-label">Weight of Baby (g)</label>
+      <input type="text" name="weight" class="form-control" id="weight" reqired value="{{ request.form.get('weight', default='') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="length" class="form-label">Length of Baby (cm)</label>
+      <input type="text" name="length" class="form-control" id="length" reqired value="{{ request.form.get('length', default='') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="head_circumference" class="form-label">Head Circumference of Baby (cm)</label>
+      <input type="text" name="head_circumference" class="form-control" id="head_circumference" reqired value="{{ request.form.get('head_circumference', default='') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="death_time" class="form-label">Death Date and Time</label>
+      <input type="datetime-local" name="death_time" class="form-control" id="death_time" value="{{ request.form.get('death_time') }}">
+    </div>
+
     <button type="submit" class="btn btn-primary">Create</button>
-    <a class="btn btn-secondary" href="{{ url_for('patient.view_patient', patient_id=patient_id) }}">Back</a>
+    <a class="btn btn-secondary" href="{{ url_for('patient.view_patient_ldr', patient_id=patient_id) }}">Back</a>
 </form>
+<hr>
 {% endblock %}

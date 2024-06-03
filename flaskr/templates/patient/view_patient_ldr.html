@@ -8,8 +8,7 @@
     <div class="col-6">
       <div class="my-3 d-grid gap-2 d-flex justify-content-end">
         <a class="btn btn-secondary" href="{{ url_for('patient.view_patient', patient_id=patient.id) }}">Back</a>
-        <a class="btn btn-primary" href="{{ url_for('diagnosis.add_anc_compulsory', patient_id=patient.id) }}">New Main Entry</a>
-        <a class="btn btn-primary" href="{{ url_for('diagnosis.add_anc_optional', patient_id=patient.id) }}">New Visit Update</a>
+        <a class="btn btn-primary" href="{{ url_for('diagnosis.add_ldr', patient_id=patient.id) }}">New Labour & Delivery Record</a>
       </div>
     </div>
   </div>
@@ -35,18 +34,14 @@
         <div class="card-body">
           <div class="row">
             <div class="col-8">
-              {% if d[0]['compulsory'] %}
-                <h3 class="fs2-text">Main Entry</h3>
-              {% else %}
-                <h3 class="fs2-text">Visit Update</h3>
-              {% endif %}
+              <h3 class="fs2-text">Labour & Delivery Record</h3>
             </div>
             <div class="col-4">
                 <div class="d-grid gap-2 d-flex justify-content-end">
                     {% if g.user.id == d[0].author_id %}
-                      <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.update_anc', diagnosis_id=d[0]['id']) }}">Edit</a>
+                      <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.update_ldr', diagnosis_id=d[0]['id']) }}">Edit</a>
                     {% endif %}
-                    <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.view_anc', diagnosis_id=d[0]['id']) }}">View</a>
+                    <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.view_ldr', diagnosis_id=d[0]['id']) }}">View</a>
                 </div>
             </div>
           </div>

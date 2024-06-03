@@ -33,10 +33,10 @@
     <p>Parity: {{ diagnosis['parity'] }}</p>
     <p>Number of Living Children: {{ diagnosis['living_children'] }}</p>
     <p>Gravida: {{ diagnosis['gravida'] }}</p>
+    <p>Medical and Surgical Complications: {{ diagnosis['medical_surgical_complications'] }}</p>
+    <p>Obstetric & Other Complications: {{ diagnosis['obstetric_other_complications'] }}</p>
   {% else %}
     <h3 class="fs2-text">Visit Update</h3>
-    <p>Pre-existing Medical and Surgical Complications: {{ diagnosis['medical_surgical_complications'] }}</p>
-    <p>Pre-existing Obstetric & Other Complications: {{ diagnosis['obstetric_other_complications'] }}</p>
     <p>Mother's Weight (kg): {{ diagnosis['weight'] }}</p>
     <p>Gestation (weeks): {{ diagnosis['gestation'] }}</p>
     <p>Blood Pressure: {{ diagnosis['blood_pressure'] }}</p>
@@ -50,4 +50,5 @@
     <p>Dispensed Mendabazole: {{ diagnosis['mendabazole'] }}</p>
     <p>Hepatitis Test: {{ diagnosis['hepatitis'] }}</p>
   {% endif %}
+  <hr>
 {% endblock %}

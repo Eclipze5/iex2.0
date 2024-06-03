@@ -141,12 +141,17 @@ def view_patient_ldr(patient_id):
         .join(User, LDR.author_id == User.id)
         .order_by(LDR.created.desc())
     )
+    current_info = (
+        ANC.query.filter_by(compulsory=True)
+        .order_by(ANC.created.desc())
+        .first()
+    )
     page = request.args.get('page', type=int, default=1)
     pagination_collection = PaginationCollection(builder, page)
-    return render_template('patient/view_patient_diagnosis.html',
+    return render_template('patient/view_patient_ldr.html',
                            patient=get_patient(patient_id),
                            diagnosis=pagination_collection.items,
-                           type=type,
+                           current_info=current_info,
                            pagination=pagination_collection.pagination)
 
 

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <div class="row">
+    <div class="col-6">
+      <h1 class="fs2-text my-3">{% block title %}{{ patient['name'] }}{% endblock %}</h1>
+    </div>
+    <div class="col-6">
+      <div class="my-3 d-grid gap-2 d-flex justify-content-end">
+        {% if g.user.id == diagnosis['author_id'] %}
+          <a class="btn btn-primary" href="{{ url_for('diagnosis.update_ldr', diagnosis_id=diagnosis['id']) }}">Edit</a>
+        {% endif %}
+        <a class="btn btn-secondary" href="{{ url_for('patient.view_patient_ldr', patient_id=patient.id) }}">Back</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div>
+    <p>Sex: {{ patient['sex'] }}</p>
+    <p>DOB: {{ patient['date_of_birth'] }}</p>
+    <p>Phone: {{ patient['phone'] }}</p>
+    <p>Address: {{ patient['address'] }}</p>
+  </div>
+
+  <h3 class="fs2-text">Labour and Delivery</h3>
+  <p>Labour Onset: {{ diagnosis['labour_onset'] }}</p>
+  <p>Membranes Ruptured: {{ diagnosis['membranes_ruptured'] }}</p>
+  <p>Duration of 2nd stage (min): {{ diagnosis['duration_2nd_stage'] }}</p>
+  <p>Duration of 3rd stage (min): {{ diagnosis['duration_3rd_stage'] }}</p>
+  <p>Placenta Delivery: {{ diagnosis['placenta_delivery'] }}</p>
+  <p>Placenta Complete: {{ diagnosis['placenta_complete'] }}</p>
+  <p>Membranes Complete: {{ diagnosis['membranes_complete'] }}</p>
+  <p>Placenta Weight (g): {{ diagnosis['placenta_weight'] }}</p>
+  <p>Blood loss during delivery (ml): {{ diagnosis['blood_loss'] }}</p>
+  <p>Shoulder Dystocia: {{ diagnosis['shoulder_dystocia'] }}</p>
+  <p>3rd Degree Tear: {{ diagnosis['tear'] }}</p>
+  <p>Uterine Rupture: {{ diagnosis['ulterine_rupture'] }}</p>
+  <p>Obsteric Hysterectomy: {{ diagnosis['obsteric_hysterectomy'] }}</p>
+  <p>Other comments: {{ diagnosis['comments'] }}</p>
+  <p>Attendant: {{ diagnosis['attendent'] }}</p>
+  <p>Other Delivery Method: {{ diagnosis['other_delivery_method'] }}</p>
+  <p>Liquor at Delivery: {{ diagnosis['delivery_liquor'] }}</p>
+
+  <hr>
+  <h3 class="fs2-text">Infant Information</h3>
+  <p>Name of Baby: {{ diagnosis['name'] }}</p>
+  <p>Date of Delivery : {{ diagnosis['delivery_date'] }}</p>
+  <p>Sex of Baby: {{ diagnosis['sex'] }}</p>
+  <p>Condition of Baby: {{ diagnosis['condition'] }}</p>
+  <p>Weight of Baby (g): {{ diagnosis['weight'] }}</p>
+  <p>Length of Baby (cm): {{ diagnosis['length'] }}</p>
+  <p>Head Circumference of Baby (cm): {{ diagnosis['head_circumference'] }}</p>
+  <p>Death Date and Time: {{ diagnosis['death_time'] }}</p>
+
+  <hr>
+{% endblock %}

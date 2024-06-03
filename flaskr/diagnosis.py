@@ -19,6 +19,13 @@ def view_anc(diagnosis_id):
     patient = get_patient(diagnosis.patient_id)
     return render_template("diagnosis/view_anc.html", patient=patient, diagnosis=diagnosis)
 
+@bp.route('/view_ldr/<int:diagnosis_id>')
+@login_required
+def view_ldr(diagnosis_id):
+    diagnosis = get_ldr(diagnosis_id)
+    patient = get_patient(diagnosis.patient_id)
+    return render_template("diagnosis/view_ldr.html", patient=patient, diagnosis=diagnosis)
+
 @bp.route("/add_anc_compulsory/<int:patient_id>", methods=("GET", "POST"))
 @login_required
 def add_anc_compulsory(patient_id):
@@ -30,6 +37,8 @@ def add_anc_compulsory(patient_id):
         parity = request.form["parity"]
         living_children = request.form["living_children"]
         gravida = request.form["gravida"]
+        medical_surgical_complications = request.form["medical_surgical_complications"]
+        obstetric_other_complications = request.form["obstetric_other_complications"]
         
         error = None
 
@@ -61,6 +70,8 @@ def add_anc_compulsory(patient_id):
                 parity=parity,
                 living_children=living_children,
                 gravida=gravida,
+                medical_surgical_complications=medical_surgical_complications,
+                obstetric_other_complications=obstetric_other_complications,
             )
             db.session.add(new_diagnosis)
             db.session.commit()
@@ -72,8 +83,6 @@ def add_anc_compulsory(patient_id):
 @login_required
 def add_anc_optional(patient_id):
     if request.method == "POST":
-        medical_surgical_complications = request.form["medical_surgical_complications"]
-        obstetric_other_complications = request.form["obstetric_other_complications"]
         weight = request.form["weight"]
         gestation = request.form["gestation"]
         blood_pressure = request.form["blood_pressure"]
@@ -89,9 +98,7 @@ def add_anc_optional(patient_id):
 
         error = None
 
-        if not (medical_surgical_complications or
-                obstetric_other_complications or
-                weight or
+        if not (weight or
                 gestation or
                 blood_pressure or
                 fetal_assessment or
@@ -114,8 +121,6 @@ def add_anc_optional(patient_id):
                 patient_id=patient_id,
                 compulsory=False,
 
-                medical_surgical_complications=medical_surgical_complications,
-                obstetric_other_complications=obstetric_other_complications,
                 weight=weight,
                 gestation=gestation,
                 blood_pressure=blood_pressure,
@@ -139,29 +144,77 @@ def add_anc_optional(patient_id):
 @login_required
 def add_ldr(patient_id):
     if request.method == "POST":
-        category = request.form["category"]
-        description = request.form["description"]
+        labour_onset = request.form["labour_onset"]
+        membranes_ruptured = request.form["membranes_ruptured"]
+        duration_2nd_stage = request.form["duration_2nd_stage"]
+        duration_3rd_stage = request.form["duration_3rd_stage"]
+        placenta_delivery = request.form["placenta_delivery"]
+        placenta_complete = "placenta_complete" in request.form
+        membranes_complete = "membranes_complete" in request.form
+        placenta_weight = request.form["placenta_weight"]
+        blood_loss = request.form["blood_loss"]
+        shoulder_dystocia = "shoulder_dystocia" in request.form
+        tear = "tear" in request.form
+        ulterine_rupture = "ulterine_rupture" in request.form
+        obsteric_hysterectomy = "obsteric_hysterectomy" in request.form
+        comments = request.form["comments"]
+        attendent = request.form["attendent"]
+        other_delivery_method = request.form["other_delivery_method"]
+        delivery_liquor = request.form["delivery_liquor"]
+        name = request.form["name"]
+        delivery_date = request.form["delivery_date"]
+        sex = request.form["sex"]
+        condition = request.form["condition"]
+        weight = request.form["weight"]
+        length = request.form["length"]
+        head_circumference = request.form["head_circumference"]
+        death_time = None if request.form["death_time"] == "" else request.form["death_time"]
+
         error = None
 
-        if not category:
-            error = "Category is required."
-        elif not description:
-            error = "Description of Birth is required."
+        # if not expected_delivery_date:
+        #     error = "Expected date of delivery is required."
+        # elif not height:
+        #     error = "Mother's height is required."
 
         if error is not None:
             flash(error)
         else:
             new_diagnosis = LDR(
-                category=category,
-                description=description,
                 author_id=g.user.id,
-                patient_id=patient_id
+                patient_id=patient_id,
+
+                labour_onset=labour_onset,
+                membranes_ruptured=membranes_ruptured,
+                duration_2nd_stage=duration_2nd_stage,
+                duration_3rd_stage=duration_3rd_stage,
+                placenta_delivery=placenta_delivery,
+                placenta_complete=placenta_complete,
+                membranes_complete=membranes_complete,
+                placenta_weight=placenta_weight,
+                blood_loss=blood_loss,
+                shoulder_dystocia=shoulder_dystocia,
+                tear=tear,
+                ulterine_rupture=ulterine_rupture,
+                obsteric_hysterectomy=obsteric_hysterectomy,
+                comments=comments,
+                attendent=attendent,
+                other_delivery_method=other_delivery_method,
+                delivery_liquor=delivery_liquor,
+                name=name,
+                delivery_date=delivery_date,
+                sex=sex,
+                condition=condition,
+                weight=weight,
+                length=length,
+                head_circumference=head_circumference,
+                death_time=death_time,
             )
             db.session.add(new_diagnosis)
             db.session.commit()
-            return redirect(url_for("patient.view_patient", patient_id=patient_id))
+            return redirect(url_for("patient.view_patient_ldr", patient_id=patient_id))
 
-    return render_template("diagnosis/add_diagnosis.html", patient_id=patient_id)
+    return render_template("diagnosis/add_ldr.html", patient_id=patient_id)
 
 @bp.route("/add_pnc/<int:patient_id>", methods=("GET", "POST"))
 @login_required
@@ -205,6 +258,8 @@ def update_anc(diagnosis_id):
             parity = request.form["parity"]
             living_children = request.form["living_children"]
             gravida = request.form["gravida"]
+            medical_surgical_complications = request.form["medical_surgical_complications"]
+            obstetric_other_complications = request.form["obstetric_other_complications"]
 
             error = None
 
@@ -225,7 +280,9 @@ def update_anc(diagnosis_id):
                 flash(error)
             else:
                 ANC.query.filter_by(id=diagnosis_id).update(
-                    {"expected_delivery_date": expected_delivery_date,
+                    {"medical_surgical_complications": medical_surgical_complications,
+                     "obstetric_other_complications": obstetric_other_complications,
+                     "expected_delivery_date": expected_delivery_date,
                      "terminate": terminate,
                      "height": height,
                      "last_menstrual_period": last_menstrual_period,
@@ -236,8 +293,6 @@ def update_anc(diagnosis_id):
                 db.session.commit()
                 return redirect(url_for("patient.view_patient_anc", patient_id=diagnosis.patient_id))
         else:
-            medical_surgical_complications = request.form["medical_surgical_complications"]
-            obstetric_other_complications = request.form["obstetric_other_complications"]
             weight = request.form["weight"]
             gestation = request.form["gestation"]
             blood_pressure = request.form["blood_pressure"]
@@ -253,9 +308,7 @@ def update_anc(diagnosis_id):
 
             error = None
 
-            if not (medical_surgical_complications or
-                    obstetric_other_complications or
-                    weight or
+            if not (weight or
                     gestation or
                     blood_pressure or
                     fetal_assessment or
@@ -273,9 +326,7 @@ def update_anc(diagnosis_id):
                 flash(error)
             else:
                 ANC.query.filter_by(id=diagnosis_id).update(
-                    {"medical_surgical_complications": medical_surgical_complications,
-                     "obstetric_other_complications": obstetric_other_complications,
-                     "weight": weight,
+                    {"weight": weight,
                      "gestation": gestation,
                      "blood_pressure": blood_pressure,
                      "urine_dipstick": urine_dipstick,

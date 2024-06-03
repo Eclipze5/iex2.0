@@ -43,8 +43,6 @@
         <input type="text" name="gravida" class="form-control" id="gravida" reqired value="{{ request.form.get('gravida', default='') or diagnosis['gravida'] }}">
       </div>
 
-    {% else %}
-
       <div class="mb-3">
         <label for="medical_surgical_complications" class="form-label">Medical and Surgical Complications</label>
         <textarea name="medical_surgical_complications" class="form-control" id="medical_surgical_complications" rows="3">{{ request.form.get('medical_surgical_complications', default='') or diagnosis['medical_surgical_complications'] }}</textarea>
@@ -54,6 +52,8 @@
         <label for="obstetric_other_complications" class="form-label">Obstetric and Other Complications</label>
         <textarea name="obstetric_other_complications" class="form-control" id="obstetric_other_complications" rows="3">{{ request.form.get('obstetric_other_complications', default='') or diagnosis['obstetric_other_complications'] }}</textarea>
       </div>
+
+    {% else %}
 
       <div class="mb-3">
         <label for="weight" class="form-label">Mother's Weight (kg)</label>
