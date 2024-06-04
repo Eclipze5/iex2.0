@@ -24,7 +24,9 @@
     <p>Address: {{ patient['address'] }}</p>
   </div>
 
+  <hr>
   <h3 class="fs2-text">Labour and Delivery</h3>
+
   <p>Labour Onset: {{ diagnosis['labour_onset'] }}</p>
   <p>Membranes Ruptured: {{ diagnosis['membranes_ruptured'] }}</p>
   <p>Duration of 2nd stage (min): {{ diagnosis['duration_2nd_stage'] }}</p>
@@ -45,6 +47,7 @@
 
   <hr>
   <h3 class="fs2-text">Infant Information</h3>
+
   <p>Name of Baby: {{ diagnosis['name'] }}</p>
   <p>Date of Delivery : {{ diagnosis['delivery_date'] }}</p>
   <p>Sex of Baby: {{ diagnosis['sex'] }}</p>

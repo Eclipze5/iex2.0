@@ -291,6 +291,7 @@ def update_anc(diagnosis_id):
                      "gravida": gravida}
                 )
                 db.session.commit()
+                flash('Ante natal care is updated', 'success')
                 return redirect(url_for("patient.view_patient_anc", patient_id=diagnosis.patient_id))
         else:
             weight = request.form["weight"]
@@ -340,6 +341,7 @@ def update_anc(diagnosis_id):
                      "hepatitis": hepatitis}
                 )
                 db.session.commit()
+                flash('Ante natal care is updated', 'success')
                 return redirect(url_for("patient.view_patient_anc", patient_id=diagnosis.patient_id))
 
     return render_template("diagnosis/update_anc.html", diagnosis=diagnosis)
@@ -350,25 +352,74 @@ def update_ldr(diagnosis_id):
     diagnosis = get_ldr(diagnosis_id)
 
     if request.method == "POST":
-        category = request.form["category"]
-        description = request.form["description"]
+        labour_onset = request.form["labour_onset"]
+        membranes_ruptured = request.form["membranes_ruptured"]
+        duration_2nd_stage = request.form["duration_2nd_stage"]
+        duration_3rd_stage = request.form["duration_3rd_stage"]
+        placenta_delivery = request.form["placenta_delivery"]
+        placenta_complete = "placenta_complete" in request.form
+        membranes_complete = "membranes_complete" in request.form
+        placenta_weight = request.form["placenta_weight"]
+        blood_loss = request.form["blood_loss"]
+        shoulder_dystocia = "shoulder_dystocia" in request.form
+        tear = "tear" in request.form
+        ulterine_rupture = "ulterine_rupture" in request.form
+        obsteric_hysterectomy = "obsteric_hysterectomy" in request.form
+        comments = request.form["comments"]
+        attendent = request.form["attendent"]
+        other_delivery_method = request.form["other_delivery_method"]
+        delivery_liquor = request.form["delivery_liquor"]
+        name = request.form["name"]
+        delivery_date = request.form["delivery_date"]
+        sex = request.form["sex"]
+        condition = request.form["condition"]
+        weight = request.form["weight"]
+        length = request.form["length"]
+        head_circumference = request.form["head_circumference"]
+        death_time = None if request.form["death_time"] == "" else request.form["death_time"]
+
         error = None
 
-        if not category:
-            error = "Category is required."
-        elif not description:
-            error = "Description of Birth is required."
+        # if not category:
+        #     error = "Category is required."
+        # elif not description:
+        #     error = "Description of Birth is required."
 
         if error is not None:
             flash(error)
         else:
-            ANC.query.filter_by(id=diagnosis_id).update(
-                {"category": category, "description": description}
+            LDR.query.filter_by(id=diagnosis_id).update(
+                {"labour_onset": labour_onset,
+                "membranes_ruptured": membranes_ruptured,
+                "duration_2nd_stage": duration_2nd_stage,
+                "duration_3rd_stage": duration_3rd_stage,
+                "placenta_delivery": placenta_delivery,
+                "placenta_complete": placenta_complete,
+                "membranes_complete": membranes_complete,
+                "placenta_weight": placenta_weight,
+                "blood_loss": blood_loss,
+                "shoulder_dystocia": shoulder_dystocia,
+                "tear": tear,
+                "ulterine_rupture": ulterine_rupture,
+                "obsteric_hysterectomy": obsteric_hysterectomy,
+                "comments": comments,
+                "attendent": attendent,
+                "other_delivery_method": other_delivery_method,
+                "delivery_liquor": delivery_liquor,
+                "name": name,
+                "delivery_date": delivery_date,
+                "sex": sex,
+                "condition": condition,
+                "weight": weight,
+                "length": length,
+                "head_circumference": head_circumference,
+                "death_time": death_time}
             )
             db.session.commit()
-            return redirect(url_for("patient.view_patient", patient_id=diagnosis.patient_id))
+            flash('Labour & delivery record is updated', 'success')
+            return redirect(url_for("patient.view_patient_ldr", patient_id=diagnosis.patient_id))
 
-    return render_template("diagnosis/update_diagnosis.html", diagnosis=diagnosis)
+    return render_template("diagnosis/update_ldr.html", diagnosis=diagnosis)
 
 @bp.route("/update_pnc/<int:diagnosis_id>", methods=["GET", "POST"])
 @login_required
@@ -392,6 +443,7 @@ def update_pnc(diagnosis_id):
                 {"category": category, "description": description}
             )
             db.session.commit()
+            flash('Post natal care is updated', 'success')
             return redirect(url_for("patient.view_patient", patient_id=diagnosis.patient_id))
 
     return render_template("diagnosis/update_diagnosis.html", diagnosis=diagnosis)
@@ -411,7 +463,7 @@ def delete_anc(diagnosis_id):
 
     return redirect(url_for("patient.view_patient_anc", patient_id=patient_id))
 
-@bp.route("/delete_anc/<int:diagnosis_id>", methods=["POST"])
+@bp.route("/delete_ldr/<int:diagnosis_id>", methods=["POST"])
 @login_required
 def delete_ldr(diagnosis_id):
     patient_id = get_ldr(diagnosis_id).patient_id
@@ -424,9 +476,9 @@ def delete_ldr(diagnosis_id):
     else:
         flash(f"Diagnosis not found", "danger")
 
-    return redirect(url_for("patient.view_patient", patient_id=patient_id))
+    return redirect(url_for("patient.view_patient_ldr", patient_id=patient_id))
 
-@bp.route("/delete_anc/<int:diagnosis_id>", methods=["POST"])
+@bp.route("/delete_pnc/<int:diagnosis_id>", methods=["POST"])
 @login_required
 def delete_pnc(diagnosis_id):
     patient_id = get_pnc(diagnosis_id).patient_id
@@ -439,7 +491,7 @@ def delete_pnc(diagnosis_id):
     else:
         flash(f"Diagnosis not found", "danger")
 
-    return redirect(url_for("patient.view_patient", patient_id=patient_id))
+    return redirect(url_for("patient.view_patient_pnc", patient_id=patient_id))
 
 def get_anc(diagnosis_id, check_author=True):
     diagnosis = ANC.query.get(diagnosis_id)
