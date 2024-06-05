@@ -4,6 +4,7 @@ from flask import (
 from werkzeug.security import generate_password_hash
 from werkzeug.exceptions import abort
 from .pagination_collection import PaginationCollection
+from sqlalchemy import union_all
 
 from .models import User, Patient, ANC, LDR, PNC, db
 
@@ -24,18 +25,60 @@ def index():
 
 @bp.route('/profile', methods=('GET', 'POST'))
 def profile():
-    builder = (
-        db.session.query(ANC, Patient)
+    anc_count = (
+        db.session.query(ANC)
         .filter(ANC.author_id == g.user.id)
-        .join(Patient, ANC.patient_id == Patient.id)
-        .order_by(ANC.created.desc())
+        .count()
     )
+    ldr_count = (
+        db.session.query(LDR)
+        .filter(LDR.author_id == g.user.id)
+        .count()
+    )
+    pnc_count = (
+        db.session.query(PNC)
+        .filter(PNC.author_id == g.user.id)
+        .count()
+    )
+    return render_template('user/profile.html',
+                           user=g.user,
+                           anc_count=anc_count,
+                           ldr_count=ldr_count,
+                           pnc_count=pnc_count)
+
+@bp.route('/profile/<int:type>', methods=('GET', 'POST'))
+def recent_diagnosis(type):
+    if type == 0:
+        builder = (
+            db.session.query(ANC, Patient)
+            .filter(ANC.author_id == g.user.id)
+            .join(Patient, ANC.patient_id == Patient.id)
+            .order_by(ANC.created.desc())
+        )
+    if type == 1:
+        builder = (
+            db.session.query(LDR, Patient)
+            .filter(LDR.author_id == g.user.id)
+            .join(Patient, LDR.patient_id == Patient.id)
+            .order_by(LDR.created.desc())
+        )
+    if type == 2:
+        builder = (
+            db.session.query(PNC, Patient)
+            .filter(PNC.author_id == g.user.id)
+            .join(Patient, PNC.patient_id == Patient.id)
+            .order_by(PNC.created.desc())
+        )
 
     page = request.args.get('page', type=int, default=1)
 
     pagination_collection = PaginationCollection(builder, page)
 
-    return render_template('user/profile.html', user=g.user, diagnosis=pagination_collection.items, pagination=pagination_collection.pagination)
+    return render_template('user/recent_diagnosis.html',
+                           user=g.user,
+                           type=type,
+                           diagnosis=pagination_collection.items,
+                           pagination=pagination_collection.pagination)
 
 @bp.route('/<int:id>', methods=('GET', 'POST'))
 def user_edit(id):

@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <div class="row my-3">
+    <div class="col-3 col-md-2">
+        <a href="{{ url_for('user.profile') }}">
+            <img src="https://source.boringavatars.com/beam/160/{{ user.id }}?colors=65cccc,ffcc66,cc99cc,99cc99,f99156" alt="Boring Avatar" style="max-width: 100%; cursor: pointer;">
+        </a>
+    </div>
+
+    <div class="col-6 d-flex align-items-center">
+      <div class="d-flex flex-column align-items-left">
+        <h1>{% block title %}{{ user.username }}{% endblock %}</h1>
+        <h4>{% if user.is_admin %} Administrative User {% else %} Standard User {% endif %}</h4>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div>
+    <h1 class="my-3">Diagnosis History</h1>
+
+    {% if type == 0 %}
+
+      {% for d in diagnosis %}
+        <article class="patient">
+          <header>
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-8">
+                    {% if d[0]['compulsory'] %}
+                      <h3 class="fs2-text">Main Entry</h3>
+                    {% else %}
+                      <h3 class="fs2-text">Visit Update</h3>
+                    {% endif %}
+                  </div>
+                  <div class="col-4">
+                      <div class="d-grid gap-2 d-flex justify-content-end">
+                          {% if g.user.id == d[0].author_id %}
+                            <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.update_anc', diagnosis_id=d[0]['id']) }}">Edit</a>
+                          {% endif %}
+                          <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.view_anc', diagnosis_id=d[0]['id']) }}">View</a>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="about">by {{ d[1]['username'] }} on {{ d[0]['created'].strftime('%Y-%m-%d') }}</div>
+              </div>
+            </div>
+          </header>
+        </article>
+      {% endfor %}
+
+    {% elif type == 1 %}
+
+      {% for d in diagnosis %}
+        <article class="patient">
+          <header>
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-8">
+                    <h3 class="fs2-text">Labour & Delivery Record</h3>
+                  </div>
+                  <div class="col-4">
+                      <div class="d-grid gap-2 d-flex justify-content-end">
+                          {% if g.user.id == d[0].author_id %}
+                            <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.update_ldr', diagnosis_id=d[0]['id']) }}">Edit</a>
+                          {% endif %}
+                          <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.view_ldr', diagnosis_id=d[0]['id']) }}">View</a>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="about">by {{ d[1]['username'] }} on {{ d[0]['created'].strftime('%Y-%m-%d') }}</div>
+              </div>
+            </div>
+          </header>
+        </article>
+      {% endfor %}
+
+    {% elif type == 2 %}
+
+      {% for d in diagnosis %}
+        <article class="patient">
+          <header>
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-8">
+                    <h3 class="fs2-text">Post Natal Care</h3>
+                  </div>
+                  <div class="col-4">
+                      <div class="d-grid gap-2 d-flex justify-content-end">
+                          {% if g.user.id == d[0].author_id %}
+                            <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.update_pnc', diagnosis_id=d[0]['id']) }}">Edit</a>
+                          {% endif %}
+                          <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.view_pnc', diagnosis_id=d[0]['id']) }}">View</a>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="about">by {{ d[1]['username'] }} on {{ d[0]['created'].strftime('%Y-%m-%d') }}</div>
+              </div>
+            </div>
+          </header>
+        </article>
+      {% endfor %}
+
+    {% endif %}
+  </div>
+  {{ pagination.links }}
+{% endblock %}

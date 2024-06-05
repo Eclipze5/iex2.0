@@ -17,31 +17,16 @@
   {% block content %}
     <div>
     <h1 class="my-3">Diagnosis History</h1>
-    {% for d in diagnosis %}
-    <article class="patient">
-      <header>
-        <div class="card mb-4">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-8">
-                  <h2 class="fs2-text">{{ d[1]['name'] }}</h2>
-              </div>
-              <div class="col-4">
-                  <div class="d-grid gap-2 d-flex justify-content-end">
-                      {% if g.user.id == d[0]['author_id'] %}
-                        <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.update_diagnosis', diagnosis_id=d[0]['id']) }}">Edit</a>
-                      {% endif %}
-                  </div>
-              </div>
-            </div>
-            <h3 class="fs2-text">{{ d[0]['category'] }}</h3>
-            <h6 class="card-subtitle mb-2 text-body-secondary">{{ d[0]['description'] }}</h6>
-            <div class="about">by {{ user.username }} on {{ d[0]['created'].strftime('%Y-%m-%d') }}</div>
-          </div>
-        </div>
-      </header>
-    </article>
-    {% endfor %}
+    <div class="row">
+      <div class="col-4">
+        <a class="btn btn-primary" href="{{ url_for('user.recent_diagnosis', type=0) }}">Recent Ante Natal Care ({{ anc_count }})</a>
+      </div>
+      <div class="col-4">
+        <a class="btn btn-primary" href="{{ url_for('user.recent_diagnosis', type=1) }}">Recent Labour and Delivery Records ({{ ldr_count }})</a>
+      </div>
+      <div class="col-4">
+        <a class="btn btn-primary" href="{{ url_for('user.recent_diagnosis', type=2) }}">Recent Post Natal Care ({{ pnc_count }})</a>
+      </div>
     </div>
-    {{ pagination.links }}
+    </div>
   {% endblock %}
