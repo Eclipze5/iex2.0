@@ -6,15 +6,44 @@
 
 {% block content %}
 <form method="post">
+
     <div class="mb-3">
-      <label for="category" class="form-label">Category</label>
-      <input type="text" name="category" class="form-control" id="category" reqired value="{{ request.form.get('name', default='') }}">
+      <label for="transferred_from" class="form-label">Patient Transferred From</label>
+      <input type="text" name="transferred_from" class="form-control" id="transferred_from" reqired value="{{ request.form.get('transferred_from', default='') }}">
     </div>
+
     <div class="mb-3">
-      <label for="description" class="form-label">Description</label>
-      <textarea name="description" class="form-control" id="description" rows="3">{{ request.form.get('description', default='') }}</textarea>
+      <label for="mother_height" class="form-label">Height of Mother (cm)</label>
+      <input type="text" name="mother_height" class="form-control" id="mother_height" reqired value="{{ request.form.get('mother_height', default='') }}">
     </div>
+
+    <div class="mb-3">
+      <label for="mother_weight" class="form-label">Weight of Mother (kg)</label>
+      <input type="text" name="mother_weight" class="form-control" id="mother_weight" reqired value="{{ request.form.get('mother_weight', default='') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="baby_weight" class="form-label">Weight of Baby (kg)</label>
+      <input type="text" name="baby_weight" class="form-control" id="baby_weight" reqired value="{{ request.form.get('baby_weight', default='') }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="mother_comments" class="form-label">Notes on Mother</label>
+      <textarea name="mother_comments" class="form-control" id="mother_comments" rows="3">{{ request.form.get('mother_comments', default='') }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="baby_comments" class="form-label">Notes on Baby </label>
+      <textarea name="baby_comments" class="form-control" id="baby_comments" rows="3">{{ request.form.get('baby_comments', default='') }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="other_comments" class="form-label">Other comments</label>
+      <textarea name="other_comments" class="form-control" id="other_comments" rows="3">{{ request.form.get('other_comments', default='') }}</textarea>
+    </div>
+
     <button type="submit" class="btn btn-primary">Create</button>
-    <a class="btn btn-secondary" href="{{ url_for('patient.view_patient', patient_id=patient_id) }}">Back</a>
+    <a class="btn btn-secondary" href="{{ url_for('patient.view_patient_pnc', patient_id=patient_id) }}">Back</a>
 </form>
+<hr>
 {% endblock %}

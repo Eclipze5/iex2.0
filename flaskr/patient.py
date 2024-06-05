@@ -167,7 +167,7 @@ def view_patient_pnc(patient_id):
     )
     page = request.args.get('page', type=int, default=1)
     pagination_collection = PaginationCollection(builder, page)
-    return render_template('patient/view_patient_diagnosis.html',
+    return render_template('patient/view_patient_pnc.html',
                            patient=get_patient(patient_id),
                            diagnosis=pagination_collection.items,
                            type=type,

@@ -26,6 +26,13 @@ def view_ldr(diagnosis_id):
     patient = get_patient(diagnosis.patient_id)
     return render_template("diagnosis/view_ldr.html", patient=patient, diagnosis=diagnosis)
 
+@bp.route('/view_pnc/<int:diagnosis_id>')
+@login_required
+def view_pnc(diagnosis_id):
+    diagnosis = get_pnc(diagnosis_id)
+    patient = get_patient(diagnosis.patient_id)
+    return render_template("diagnosis/view_pnc.html", patient=patient, diagnosis=diagnosis)
+
 @bp.route("/add_anc_compulsory/<int:patient_id>", methods=("GET", "POST"))
 @login_required
 def add_anc_compulsory(patient_id):
@@ -220,29 +227,41 @@ def add_ldr(patient_id):
 @login_required
 def add_pnc(patient_id):
     if request.method == "POST":
-        category = request.form["category"]
-        description = request.form["description"]
+        transferred_from = request.form["transferred_from"]
+        mother_height = request.form["mother_height"]
+        mother_weight = request.form["mother_weight"]
+        baby_weight = request.form["baby_weight"]
+        mother_comments = request.form["mother_comments"]
+        baby_comments = request.form["baby_comments"]
+        other_comments = request.form["other_comments"]
+
         error = None
 
-        if not category:
-            error = "Category is required."
-        elif not description:
-            error = "Description of Birth is required."
+        # if not category:
+        #     error = "Category is required."
+        # elif not description:
+        #     error = "Description of Birth is required."
 
         if error is not None:
             flash(error)
         else:
             new_diagnosis = PNC(
-                category=category,
-                description=description,
                 author_id=g.user.id,
-                patient_id=patient_id
+                patient_id=patient_id,
+
+                transferred_from = transferred_from,
+                mother_height = mother_height,
+                mother_weight=mother_weight,
+                baby_weight=baby_weight,
+                mother_comments=mother_comments,
+                baby_comments=baby_comments,
+                other_comments=other_comments,
             )
             db.session.add(new_diagnosis)
             db.session.commit()
-            return redirect(url_for("patient.view_patient", patient_id=patient_id))
+            return redirect(url_for("patient.view_patient_pnc", patient_id=patient_id))
 
-    return render_template("diagnosis/add_diagnosis.html", patient_id=patient_id)
+    return render_template("diagnosis/add_pnc.html", patient_id=patient_id)
 
 @bp.route("/update_anc/<int:diagnosis_id>", methods=["GET", "POST"])
 @login_required
@@ -427,26 +446,38 @@ def update_pnc(diagnosis_id):
     diagnosis = get_pnc(diagnosis_id)
 
     if request.method == "POST":
-        category = request.form["category"]
-        description = request.form["description"]
+        transferred_from = request.form["transferred_from"]
+        mother_height = request.form["mother_height"]
+        mother_weight = request.form["mother_weight"]
+        baby_weight = request.form["baby_weight"]
+        mother_comments = request.form["mother_comments"]
+        baby_comments = request.form["baby_comments"]
+        other_comments = request.form["other_comments"]
+
         error = None
 
-        if not category:
-            error = "Category is required."
-        elif not description:
-            error = "Description of Birth is required."
+        # if not category:
+        #     error = "Category is required."
+        # elif not description:
+        #     error = "Description of Birth is required."
 
         if error is not None:
             flash(error)
         else:
-            ANC.query.filter_by(id=diagnosis_id).update(
-                {"category": category, "description": description}
+            PNC.query.filter_by(id=diagnosis_id).update(
+                {"transferred_from": transferred_from,
+                 "mother_height": mother_height,
+                 "mother_weight": mother_weight,
+                 "baby_weight": baby_weight,
+                 "mother_comments": mother_comments,
+                 "baby_comments": baby_comments,
+                 "other_comments": other_comments}
             )
             db.session.commit()
             flash('Post natal care is updated', 'success')
-            return redirect(url_for("patient.view_patient", patient_id=diagnosis.patient_id))
+            return redirect(url_for("patient.view_patient_pnc", patient_id=diagnosis.patient_id))
 
-    return render_template("diagnosis/update_diagnosis.html", diagnosis=diagnosis)
+    return render_template("diagnosis/update_pnc.html", diagnosis=diagnosis)
 
 @bp.route("/delete_anc/<int:diagnosis_id>", methods=["POST"])
 @login_required

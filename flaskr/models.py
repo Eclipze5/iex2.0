@@ -94,8 +94,15 @@ class PNC(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id', ondelete='CASCADE'), nullable=False)
     created = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
-    category = db.Column(db.String(32), nullable=False)
-    description = db.Column(db.Text, nullable=False)
+
+    transferred_from = db.Column(db.String(256), nullable=False)
+    mother_height = db.Column(db.String(8), nullable=True)
+    mother_weight = db.Column(db.String(8), nullable=True)
+    baby_weight = db.Column(db.String(8), nullable=True)
+    mother_comments = db.Column(db.Text, nullable=True)
+    baby_comments = db.Column(db.Text, nullable=True)
+    other_comments = db.Column(db.Text, nullable=True)
+
 
     def __repr__(self):
         return f'<Diagnosis {self.id}>'

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1 class="my-3">{% block title %}{% if diagnosis['compulsory'] %}Edit Main Entry{% else %}Edit Visit Update{% endif %}{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+
+    <h3 class="my-3">Post Natal Care</h3>
+
+    <div class="mb-3">
+      <label for="transferred_from" class="form-label">Patient Transferred From</label>
+      <input type="text" name="transferred_from" class="form-control" id="transferred_from" reqired value="{{ request.form.get('transferred_from', default='') or diagnosis['transferred_from']  }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="mother_height" class="form-label">Height of Mother (cm)</label>
+      <input type="text" name="mother_height" class="form-control" id="mother_height" reqired value="{{ request.form.get('mother_height', default='') or diagnosis['mother_height']  }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="mother_weight" class="form-label">Weight of Mother (kg)</label>
+      <input type="text" name="mother_weight" class="form-control" id="mother_weight" reqired value="{{ request.form.get('mother_weight', default='') or diagnosis['mother_weight']  }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="baby_weight" class="form-label">Weight of Baby (kg)</label>
+      <input type="text" name="baby_weight" class="form-control" id="baby_weight" reqired value="{{ request.form.get('baby_weight', default='') or diagnosis['baby_weight']  }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="mother_comments" class="form-label">Notes on Mother</label>
+      <textarea name="mother_comments" class="form-control" id="mother_comments" rows="3">{{ request.form.get('mother_comments', default='') or diagnosis['mother_comments']  }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="baby_comments" class="form-label">Notes on Baby </label>
+      <textarea name="baby_comments" class="form-control" id="baby_comments" rows="3">{{ request.form.get('baby_comments', default='') or diagnosis['baby_comments']  }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="other_comments" class="form-label">Other comments</label>
+      <textarea name="other_comments" class="form-control" id="other_comments" rows="3">{{ request.form.get('other_comments', default='') or diagnosis['other_comments']  }}</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a class="btn btn-secondary" href="{{ url_for('patient.view_patient_pnc', patient_id=diagnosis['patient_id']) }}">Back</a>
+    <button id="delete_trigger" class="btn btn-danger float-end" type="submit" onclick="return deleteDiagnosis()">Delete</button>
+  </form>
+  <hr>
+
+  <form id="delete_form" action="{{ url_for('diagnosis.delete_pnc', diagnosis_id=diagnosis['id']) }}" method="post">
+
+  </form>
+
+  <script>
+    deleteDiagnosis = () => {
+      if (confirm('Confirm to delete this diagnosis?')) {
+        document.getElementById('delete_form').submit();
+      }
+
+      return false;
+    }
+  </script>
+{% endblock %}

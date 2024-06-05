@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <div class="row">
+    <div class="col-6">
+      <h1 class="fs2-text my-3">{% block title %}{{ patient['name'] }}{% endblock %}</h1>
+    </div>
+    <div class="col-6">
+      <div class="my-3 d-grid gap-2 d-flex justify-content-end">
+        {% if g.user.id == diagnosis['author_id'] %}
+          <a class="btn btn-primary" href="{{ url_for('diagnosis.update_pnc', diagnosis_id=diagnosis['id']) }}">Edit</a>
+        {% endif %}
+        <a class="btn btn-secondary" href="{{ url_for('patient.view_patient_pnc', patient_id=patient.id) }}">Back</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div>
+    <p>Sex: {{ patient['sex'] }}</p>
+    <p>DOB: {{ patient['date_of_birth'] }}</p>
+    <p>Phone: {{ patient['phone'] }}</p>
+    <p>Address: {{ patient['address'] }}</p>
+  </div>
+
+  <hr>
+  <h3 class="fs2-text">Post Natal Care</h3>
+
+  <p>Patient Transferred From: {{ diagnosis['transferred_from'] }}</p>
+  <p>Height of Mother (cm): {{ diagnosis['mother_height'] }}</p>
+  <p>Weight of Mother (kg): {{ diagnosis['mother_weight'] }}</p>
+  <p>Weight of Baby (kg): {{ diagnosis['baby_weight'] }}</p>
+  <p>Notes on Mother: {{ diagnosis['mother_comments'] }}</p>
+  <p>Notes on Baby: {{ diagnosis['baby_comments'] }}</p>
+  <p>Other Comments: {{ diagnosis['other_comments'] }}</p>
+
+  <hr>
+{% endblock %}
