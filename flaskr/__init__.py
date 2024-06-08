@@ -52,3 +52,5 @@ def create_app(test_config=None):
     print("Flask app created.")
 
     return app
+
+app = create_app()
