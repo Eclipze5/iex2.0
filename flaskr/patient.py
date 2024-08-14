@@ -120,7 +120,7 @@ def view_patient_anc(patient_id):
         .order_by(ANC.created.desc())
     )
     current_info = (
-        ANC.query.filter_by(compulsory=True)
+        ANC.query.filter_by(patient_id=patient_id, compulsory=True)
         .order_by(ANC.created.desc())
         .first()
     )
@@ -142,7 +142,7 @@ def view_patient_ldr(patient_id):
         .order_by(LDR.created.desc())
     )
     current_info = (
-        ANC.query.filter_by(compulsory=True)
+        ANC.query.filter_by(patient_id=patient_id, compulsory=True)
         .order_by(ANC.created.desc())
         .first()
     )
