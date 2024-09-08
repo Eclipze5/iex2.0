@@ -1,41 +1,41 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1 class="my-3">{% block title %}Add Patient{% endblock %}</h1>
+  <h1 class="my-3">{% block title %}Add Basic Patient Profile ប្រវត្តិអ្នកជម្ងឺ បន្ថែមទៀត{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
 <form method="post">
 
     <div class="mb-3">
-      <label for="name" class="form-label">Name</label>
+      <label for="name" class="form-label">Name ឈ្មោះ</label>
       <input type="text" name="name" class="form-control" id="name" reqired value="{{ request.form.get('name', default='') }}">
     </div>
 
     <div class="mb-3">
-      <label for="sex" class="form-label">Sex</label>
+      <label for="sex" class="form-label">Sex ភេទ</label>
       <select id="sex" name="sex" class="form-select" >
-        <option value="male" {% if request.form.get('sex', default='') == 'male' %} selected {% endif %}>Male</option>
-        <option value="female" {% if request.form.get('sex', default='') == 'female' %} selected {% endif %}>Female</option>
+        <option value="male" {% if request.form.get('sex', default='') == 'male' %} selected {% endif %}>Male បុរស</option>
+        <option value="female" {% if request.form.get('sex', default='') == 'female' %} selected {% endif %}>Female ស្ត្រី</option>
       </select>
     </div>
 
     <div class="mb-3">
-      <label for="date_of_birth" class="form-label">Date of Birth</label>
+      <label for="date_of_birth" class="form-label">Date of Birth ថ្ងៃខែឆ្នាំកំណើត</label>
       <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" required value="{{ request.form.get('date_of_birth') }}">
     </div>
 
     <div class="mb-3">
-      <label for="phone" class="form-label">Phone</label>
+      <label for="phone" class="form-label">Phone លេខទូរស័ព្ទ</label>
       <input type="text" name="phone" class="form-control" id="phone" reqired value="{{ request.form.get('phone', default='') }}">
     </div>
 
     <div class="mb-3">
-      <label for="address" class="form-label">Address</label>
+      <label for="address" class="form-label">Address អាស័យដ្ធាន</label>
       <textarea class="form-control" id="address" name="address" rows="3">{{ request.form.get('address', default='') }}</textarea>
     </div>
 
-    <button type="submit" class="btn btn-primary">Create</button>
-    <a class="btn btn-secondary" href="{{ url_for('main.index') }}">Back</a>
+    <button type="submit" class="btn btn-primary">Create បង្កើត</button>
+    <a class="btn btn-secondary" href="{{ url_for('main.index') }}">Back ត្រឡប់ទៅវិញ។</a>
 </form>
 {% endblock %}

@@ -18,22 +18,22 @@
 
 {% block content %}
   <div>
-    <p>Sex: {{ patient['sex'] }}</p>
-    <p>DOB: {{ patient['date_of_birth'] }}</p>
-    <p>Phone: {{ patient['phone'] }}</p>
-    <p>Address: {{ patient['address'] }}</p>
+    <p>Sex ភេទ: {{ patient['sex'] }}</p>
+    <p>DOB ថ្ងៃខែឆ្នាំកំណើត: {{ patient['date_of_birth'] }}</p>
+    <p>Phone លេខ​ទូរស័ព្ទ: {{ patient['phone'] }}</p>
+    <p>Address អាសយដ្ឋាន: {{ patient['address'] }}</p>
   </div>
 
   <hr>
   <h3 class="fs2-text">Post Natal Care</h3>
 
-  <p>Patient Transferred From: {{ diagnosis['transferred_from'] }}</p>
-  <p>Height of Mother (cm): {{ diagnosis['mother_height'] }}</p>
-  <p>Weight of Mother (kg): {{ diagnosis['mother_weight'] }}</p>
-  <p>Weight of Baby (kg): {{ diagnosis['baby_weight'] }}</p>
-  <p>Notes on Mother: {{ diagnosis['mother_comments'] }}</p>
-  <p>Notes on Baby: {{ diagnosis['baby_comments'] }}</p>
-  <p>Other Comments: {{ diagnosis['other_comments'] }}</p>
+  <p>Patient Transferred From ទំរង់បញ្ចូនអ្នកជំងឺ: {{ diagnosis['transferred_from'] }}</p>
+  <p>Height of Mother កម្ពស់របស់ម្តាយ (cm): {{ diagnosis['mother_height'] }}</p>
+  <p>Weight of Mother ទំំងន់របស់ម្តាយ (kg): {{ diagnosis['mother_weight'] }}</p>
+  <p>Weight of Baby ទំំងន់របស់ទារក (kg): {{ diagnosis['baby_weight'] }}</p>
+  <p>Notes on Mother កត់សម្គាល់លើម្តាយ: {{ diagnosis['mother_comments'] }}</p>
+  <p>Notes on Baby កត់សម្គាល់លើទារក: {{ diagnosis['baby_comments'] }}</p>
+  <p>Other Comments ផ្សេងៗ: {{ diagnosis['other_comments'] }}</p>
 
   <hr>
 {% endblock %}

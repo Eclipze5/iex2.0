@@ -7,8 +7,8 @@
     </div>
     <div class="col-6">
       <div class="my-3 d-grid gap-2 d-flex justify-content-end">
-        <a class="btn btn-secondary" href="{{ url_for('patient.view_patient', patient_id=patient.id) }}">Back</a>
-        <a class="btn btn-primary" href="{{ url_for('diagnosis.add_ldr', patient_id=patient.id) }}">New Labour & Delivery Record</a>
+        <a class="btn btn-secondary" href="{{ url_for('patient.view_patient', patient_id=patient.id) }}">Back ត្រឡប់ទៅវិញ។</a>
+        <a class="btn btn-primary" href="{{ url_for('diagnosis.add_ldr', patient_id=patient.id) }}">New Labour & Delivery Record កំណត់ត្រាការងារ និងការដឹកជញ្ជូនថ្មី។</a>
       </div>
     </div>
   </div>
@@ -16,15 +16,15 @@
 
 {% block content %}
   <div>
-    <p>Expected Date of Delivery: {{ current_info['expected_delivery_date'] }}</p>
-    <p>Termination of Pregnancy: {{ current_info['terminate'] }}</p>
-    <p>Mother's Height: {{ current_info['height'] }}</p>
-    <p>Last Menstral Period: {{ current_info['last_menstrual_period'] }}</p>
-    <p>Parity: {{ current_info['parity'] }}</p>
-    <p>Number of Living Children: {{ current_info['living_children'] }}</p>
-    <p>Gravida: {{ current_info['gravida'] }}</p>
-    <p>Medical and Surgical Complications: {{ current_info['medical_surgical_complications'] }}</p>
-    <p>Obstetric & Other Complications: {{ current_info['obstetric_other_complications'] }}</p>
+    <p>Expected Date of Delivery ថ្ងៃសម្រាលរំពឺងទុក: {{ current_info['expected_delivery_date'] }}</p>
+    <p>Termination of Pregnancy ការបញ្ចប់គភ៌ចុងក្រោយ: {{ current_info['terminate'] }}</p>
+    <p>Mother's Height កម្ពស់របស់ម្តាយ (cm): {{ current_info['height'] }}</p>
+    <p>Last Menstral Period ថ្ងៃមករដូវចុងក្រោយ: {{ current_info['last_menstrual_period'] }}</p>
+    <p>Parity ចំនួនសម្រាល (រួមទាំងទារកបច្ចុប្បន្ន): {{ current_info['parity'] }}</p>
+    <p>Number of Living Children ចំនួនកូននៅរស់: {{ current_info['living_children'] }}</p>
+    <p>Gravida ចំនួនពរពោះ (​រួមទាំងការពរពោះបច្ចុប្បន្ន): {{ current_info['gravida'] }}</p>
+    <p>Medical and Surgical Complications ការត្រៀម ប្រឈមនូវផលវិបាក វេជ្ជសាស្រ្ត​ និង​ ការវះកាត់: {{ current_info['medical_surgical_complications'] }}</p>
+    <p>Obstetric & Other Complications ការត្រៀមប្រឈមនូវផលវិបាក សម្ភព​ និង​ ផ្សេងៗ​ទៀត: {{ current_info['obstetric_other_complications'] }}</p>
   </div>
   <div>
   {% for d in diagnosis %}
@@ -34,14 +34,14 @@
           <div class="card-body">
             <div class="row">
               <div class="col-8">
-                <h3 class="fs2-text">Labour & Delivery Record</h3>
+                <h3 class="fs2-text">Labour and Delivery Records ការកត់ត្រា ការឈឺពោះ នឹង​ ការសម្រាល</h3>
               </div>
               <div class="col-4">
                   <div class="d-grid gap-2 d-flex justify-content-end">
                       {% if g.user.id == d[0].author_id %}
-                        <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.update_ldr', diagnosis_id=d[0]['id']) }}">Edit</a>
+                        <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.update_ldr', diagnosis_id=d[0]['id']) }}">Edit កែសម្រួល</a>
                       {% endif %}
-                      <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.view_ldr', diagnosis_id=d[0]['id']) }}">View</a>
+                      <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.view_ldr', diagnosis_id=d[0]['id']) }}">View ទិដ្ឋភាព</a>
                   </div>
               </div>
             </div>

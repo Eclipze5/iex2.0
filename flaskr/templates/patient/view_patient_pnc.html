@@ -7,8 +7,8 @@
     </div>
     <div class="col-6">
       <div class="my-3 d-grid gap-2 d-flex justify-content-end">
-        <a class="btn btn-secondary" href="{{ url_for('patient.view_patient', patient_id=patient.id) }}">Back</a>
-        <a class="btn btn-primary" href="{{ url_for('diagnosis.add_pnc', patient_id=patient.id) }}">New Post Natal Care</a>
+        <a class="btn btn-secondary" href="{{ url_for('patient.view_patient', patient_id=patient.id) }}">Back ត្រឡប់ទៅវិញ។</a>
+        <a class="btn btn-primary" href="{{ url_for('diagnosis.add_pnc', patient_id=patient.id) }}">New Post Natal Care កំណត់ត្រាថ្មីក្រោយសម្រាល</a>
       </div>
     </div>
   </div>
@@ -16,10 +16,10 @@
 
 {% block content %}
   <div>
-    <p>Sex: {{ patient['sex'] }}</p>
-    <p>DOB: {{ patient['date_of_birth'] }}</p>
-    <p>Phone: {{ patient['phone'] }}</p>
-    <p>Address: {{ patient['address'] }}</p>
+    <p>Sex ភេទ: {{ patient['sex'] }}</p>
+    <p>DOB ថ្ងៃខែឆ្នាំកំណើត: {{ patient['date_of_birth'] }}</p>
+    <p>Phone ឈ្មោះ: {{ patient['phone'] }}</p>
+    <p>Address អាស័យដ្ធាន: {{ patient['address'] }}</p>
   </div>
   <div>
   {% for d in diagnosis %}
@@ -29,14 +29,14 @@
           <div class="card-body">
             <div class="row">
               <div class="col-8">
-                <h3 class="fs2-text">Post Natal Care</h3>
+                <h3 class="fs2-text">Post Natal Care ការថែទាំក្រោយសម្រាល</h3>
               </div>
               <div class="col-4">
                   <div class="d-grid gap-2 d-flex justify-content-end">
                       {% if g.user.id == d[0].author_id %}
-                        <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.update_pnc', diagnosis_id=d[0]['id']) }}">Edit</a>
+                        <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.update_pnc', diagnosis_id=d[0]['id']) }}">Edit កែសម្រួល</a>
                       {% endif %}
-                      <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.view_pnc', diagnosis_id=d[0]['id']) }}">View</a>
+                      <a class="btn btn-outline-primary" href="{{ url_for('diagnosis.view_pnc', diagnosis_id=d[0]['id']) }}">View ទិដ្ឋភាព</a>
                   </div>
               </div>
             </div>

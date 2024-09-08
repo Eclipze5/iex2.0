@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1 class="my-3">{% block title %}Search{% endblock %}</h1>
+  <h1 class="my-3">{% block title %}Search ស្វែងរក{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
@@ -11,35 +11,35 @@
       <input type="text" name="name" class="form-control" id="name" value="{{ request.args.get('name', default='') }}">
     </div>
     <div class="mb-3">
-      <label for="sex" class="form-label">Sex</label>
+      <label for="sex" class="form-label">Sex ភេទ</label>
       <select id="sex" name="sex" class="form-select" >
         <option value=""></option>
-        <option value="male" {% if request.args.get('sex', default='') == 'male' %} selected {% endif %}>Male</option>
-        <option value="female" {% if request.args.get('sex', default='') == 'female' %} selected {% endif %}>Female</option>
+        <option value="male" {% if request.args.get('sex', default='') == 'male' %} selected {% endif %}>Male បុរស</option>
+        <option value="female" {% if request.args.get('sex', default='') == 'female' %} selected {% endif %}>Female ស្ត្រី</option>
       </select>
     </div>
     <div class="mb-3">
-      <label for="date_of_birth" class="form-label">Date of Birth</label>
+      <label for="date_of_birth" class="form-label">Date of Birth ថ្ងៃខែឆ្នាំកំណើត</label>
       <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="{{ request.args.get('date_of_birth') }}">
     </div>
 
     <div class="mb-3">
-      <label for="phone" class="form-label">Phone</label>
+      <label for="phone" class="form-label">Phone លេខទូរស័ព្ទ</label>
       <input type="text" name="phone" class="form-control" id="phone" value="{{ request.args.get('phone', default='') }}">
     </div>
 
     <div class="mb-3">
-      <label for="address" class="form-label">Address</label>
+      <label for="address" class="form-label">Address អាស័យដ្ធាន</label>
       <textarea class="form-control" id="address" name="address" rows="3">{{ request.args.get('address', default='') }}</textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Search</button>
-    <a class="btn btn-secondary" href="{{ url_for('main.index') }}">Back</a>
+    <button type="submit" class="btn btn-primary">Search ស្វែងរក</button>
+    <a class="btn btn-secondary" href="{{ url_for('main.index') }}">Back ត្រឡប់ទៅវិញ។</a>
 </form>
 
 {% if request.args %}
 <hr class="border border-primary border-3 opacity-75">
 {% if not patients|length %}
-<div class="alert alert-warning">No patient is found, please try again</div>
+<div class="alert alert-warning">No patient is found, please try again រកមិនឃើញអ្នកជំងឺទេ សូមព្យាយាមម្តងទៀត</div>
 {% endif %}
 {% endif %}
 <div class="row">
@@ -52,7 +52,7 @@
         <h6 class="card-subtitle mb-2 text-body-secondary">{{ patient.phone }}</h6>
         <p class="card-text">{{ patient.address }}</p>
         {% if g.user.is_admin %}
-        <a href="{{ url_for('patient.update_patient', patient_id=patient.id) }}" class="btn btn-outline-primary m-2">Edit</a>
+        <a href="{{ url_for('patient.update_patient', patient_id=patient.id) }}" class="btn btn-outline-primary m-2">Edit កែសម្រួល</a>
         {% endif %}
       </a>
     </div>

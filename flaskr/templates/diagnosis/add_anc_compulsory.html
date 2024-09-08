@@ -1,59 +1,59 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1 class="my-3">{% block title %}Add Diagnosis{% endblock %}</h1>
+  <h1 class="my-3">{% block title %}New Main Entry ប្រមូលព័ត៌មានសំខាន់ៗ{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
 <form method="post">
 
     <div class="mb-3">
-      <label for="expected_delivery_date" class="form-label">Expected Date of Delivery</label>
+      <label for="expected_delivery_date" class="form-label">Expected Date of Delivery ថ្ងៃសម្រាលរំពឺងទុក</label>
       <input type="date" name="expected_delivery_date" class="form-control" id="expected_delivery_date" required value="{{ request.form.get('expected_delivery_date') }}">
     </div>
 
     <div class="mb-3">
-      <label for="terminate" class="form-label">Termination of Pregnancy</label>
+      <label for="terminate" class="form-label">Termination of Pregnancy ការបញ្ចប់គភ៌ចុងក្រោយ</label>
       <input type="checkbox" name="terminate" id="terminate" value="true">
     </div>
 
     <div class="mb-3">
-      <label for="height" class="form-label">Mother's Height (cm)</label>
+      <label for="height" class="form-label">Mother's Height កម្ពស់របស់ម្តាយ (cm)</label>
       <input type="text" name="height" class="form-control" id="height" reqired value="{{ request.form.get('height', default='') }}">
     </div>
 
     <div class="mb-3">
-      <label for="last_menstrual_period" class="form-label">Last Menstral Period</label>
+      <label for="last_menstrual_period" class="form-label">Last Menstral Period ថ្ងៃមករដូវចុងក្រោយ</label>
       <input type="date" name="last_menstrual_period" class="form-control" id="last_menstrual_period" required value="{{ request.form.get('last_menstrual_period') }}">
     </div>
 
     <div class="mb-3">
-      <label for="parity" class="form-label">Parity</label>
+      <label for="parity" class="form-label">Parity ចំនួនសម្រាល (រួមទាំងទារកបច្ចុប្បន្ន)</label>
       <input type="text" name="parity" class="form-control" id="parity" reqired value="{{ request.form.get('parity', default='') }}">
     </div>
 
     <div class="mb-3">
-      <label for="living_children" class="form-label">Number of Living Children</label>
+      <label for="living_children" class="form-label">Number of Living Children ចំនួនកូននៅរស់</label>
       <input type="text" name="living_children" class="form-control" id="living_children" reqired value="{{ request.form.get('living_children', default='') }}">
     </div>
 
     <div class="mb-3">
-      <label for="gravida" class="form-label">Gravida</label>
+      <label for="gravida" class="form-label">Gravida ចំនួនពរពោះ (​រួមទាំងការពរពោះបច្ចុប្បន្ន)</label>
       <input type="text" name="gravida" class="form-control" id="gravida" reqired value="{{ request.form.get('gravida', default='') }}">
     </div>
 
     <div class="mb-3">
-      <label for="medical_surgical_complications" class="form-label">Medical and Surgical Complications</label>
+      <label for="medical_surgical_complications" class="form-label">Medical and Surgical Complications ការត្រៀម ប្រឈមនូវផលវិបាក វេជ្ជសាស្រ្ត​ និង​ ការវះកាត់</label>
       <textarea name="medical_surgical_complications" class="form-control" id="medical_surgical_complications" rows="3">{{ request.form.get('medical_surgical_complications', default='') }}</textarea>
     </div>
 
     <div class="mb-3">
-      <label for="obstetric_other_complications" class="form-label">Obstetric and Other Complications</label>
+      <label for="obstetric_other_complications" class="form-label">Obstetric and Other Complications ការត្រៀមប្រឈមនូវផលវិបាក សម្ភព​ និង​ ផ្សេងៗ​ទៀត</label>
       <textarea name="obstetric_other_complications" class="form-control" id="obstetric_other_complications" rows="3">{{ request.form.get('obstetric_other_complications', default='') }}</textarea>
     </div>
 
-    <button type="submit" class="btn btn-primary">Create</button>
-    <a class="btn btn-secondary" href="{{ url_for('patient.view_patient_anc', patient_id=patient_id) }}">Back</a>
+    <button type="submit" class="btn btn-primary">Create បង្កើត</button>
+    <a class="btn btn-secondary" href="{{ url_for('patient.view_patient_anc', patient_id=patient_id) }}">Back ត្រឡប់ទៅវិញ។</a>
 </form>
 <hr>
 {% endblock %}

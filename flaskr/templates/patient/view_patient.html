@@ -6,21 +6,21 @@
 
 {% block content %}
   <div>
-    <p>Sex: {{ patient['sex'] }}</p>
-    <p>DOB: {{ patient['date_of_birth'] }}</p>
-    <p>Phone: {{ patient['phone'] }}</p>
-    <p>Address: {{ patient['address'] }}</p>
+    <p>Sex ភេទ: {{ patient['sex'] }}</p>
+    <p>DOB ថ្ងៃខែឆ្នាំកំណើត: {{ patient['date_of_birth'] }}</p>
+    <p>Phone លេខទូរស័ព្ទ: {{ patient['phone'] }}</p>
+    <p>Address អាស័យដ្ធាន: {{ patient['address'] }}</p>
   </div>
 
   <div class="row">
     <div class="col-4">
-      <a class="btn btn-primary" href="{{ url_for('patient.view_patient_anc', patient_id=patient.id) }}">Ante Natal Care ({{ anc_count }})</a>
+      <a class="btn btn-primary" href="{{ url_for('patient.view_patient_anc', patient_id=patient.id) }}">Ante Natal Care ការថែទាំមុនសម្រាល ({{ anc_count }})</a>
     </div>
     <div class="col-4">
-      <a class="btn btn-primary" href="{{ url_for('patient.view_patient_ldr', patient_id=patient.id) }}">Labour and Delivery Records ({{ ldr_count }})</a>
+      <a class="btn btn-primary" href="{{ url_for('patient.view_patient_ldr', patient_id=patient.id) }}">Labour and Delivery Records ការកត់ត្រា ការឈឺពោះ នឹង​ ការសម្រាល ({{ ldr_count }})</a>
     </div>
     <div class="col-4">
-      <a class="btn btn-primary" href="{{ url_for('patient.view_patient_pnc', patient_id=patient.id) }}">Post Natal Care ({{ pnc_count }})</a>
+      <a class="btn btn-primary" href="{{ url_for('patient.view_patient_pnc', patient_id=patient.id) }}">Post Natal Care ការថែទាំក្រោយសម្រាល ({{ pnc_count }})</a>
     </div>
   </div>
 {% endblock %}

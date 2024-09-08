@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1 class="my-3">{% block title %}{% if diagnosis['compulsory'] %}Edit Main Entry{% else %}Edit Visit Update{% endif %}{% endblock %}</h1>
+  <h1 class="my-3">{% block title %}{% if diagnosis['compulsory'] %}Edit Main Entry កែសម្រួលធាតុសំខាន់{% else %}Edit Visit Update កែសម្រួលការចូលមើលបច្ចុប្បន្នភាព{% endif %}{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
@@ -9,118 +9,118 @@
     {% if diagnosis['compulsory'] %}
 
       <div class="mb-3">
-        <label for="expected_delivery_date" class="form-label">Expected Date of Delivery</label>
+        <label for="expected_delivery_date" class="form-label">Expected Date of Delivery ថ្ងៃសម្រាលរំពឺងទុក</label>
         <input type="date" name="expected_delivery_date" class="form-control" id="expected_delivery_date" required value="{{ request.form.get('expected_delivery_date') or diagnosis['expected_delivery_date'] }}">
       </div>
 
       <div class="mb-3">
-        <label for="terminate" class="form-label">Termination of Pregnancy</label>
+        <label for="terminate" class="form-label">Termination of Pregnancy ការបញ្ចប់គភ៌ចុងក្រោយ</label>
         <input type="checkbox" name="terminate" id="terminate" value="true" {{ 'checked' if diagnosis['terminate'] else '' }}>
       </div>
 
       <div class="mb-3">
-        <label for="height" class="form-label">Mother's Height (cm)</label>
+        <label for="height" class="form-label">Mother's Height កម្ពស់របស់ម្តាយ (cm)</label>
         <input type="text" name="height" class="form-control" id="height" reqired value="{{ request.form.get('height', default='') or diagnosis['height'] }}">
       </div>
 
       <div class="mb-3">
-        <label for="last_menstrual_period" class="form-label">Last Menstral Period</label>
+        <label for="last_menstrual_period" class="form-label">Last Menstral Period ថ្ងៃមករដូវចុងក្រោយ</label>
         <input type="date" name="last_menstrual_period" class="form-control" id="last_menstrual_period" required value="{{ request.form.get('last_menstrual_period') or diagnosis['last_menstrual_period'] }}">
       </div>
 
       <div class="mb-3">
-        <label for="parity" class="form-label">Parity</label>
+        <label for="parity" class="form-label">Parity ចំនួនសម្រាល (រួមទាំងទារកបច្ចុប្បន្ន)</label>
         <input type="text" name="parity" class="form-control" id="parity" reqired value="{{ request.form.get('parity', default='') or diagnosis['parity'] }}">
       </div>
 
       <div class="mb-3">
-        <label for="living_children" class="form-label">Number of Living Children</label>
+        <label for="living_children" class="form-label">Number of Living Children ចំនួនកូននៅរស់</label>
         <input type="text" name="living_children" class="form-control" id="living_children" reqired value="{{ request.form.get('living_children', default='') or diagnosis['living_children'] }}">
       </div>
 
       <div class="mb-3">
-        <label for="gravida" class="form-label">Gravida</label>
+        <label for="gravida" class="form-label">Gravida ចំនួនពរពោះ (​រួមទាំងការពរពោះបច្ចុប្បន្ន)</label>
         <input type="text" name="gravida" class="form-control" id="gravida" reqired value="{{ request.form.get('gravida', default='') or diagnosis['gravida'] }}">
       </div>
 
       <div class="mb-3">
-        <label for="medical_surgical_complications" class="form-label">Medical and Surgical Complications</label>
+        <label for="medical_surgical_complications" class="form-label">Medical and Surgical Complications ការត្រៀម ប្រឈមនូវផលវិបាក វេជ្ជសាស្រ្ត​ និង​ ការវះកាត់</label>
         <textarea name="medical_surgical_complications" class="form-control" id="medical_surgical_complications" rows="3">{{ request.form.get('medical_surgical_complications', default='') or diagnosis['medical_surgical_complications'] }}</textarea>
       </div>
 
       <div class="mb-3">
-        <label for="obstetric_other_complications" class="form-label">Obstetric and Other Complications</label>
+        <label for="obstetric_other_complications" class="form-label">Obstetric and Other Complications ការត្រៀមប្រឈមនូវផលវិបាក សម្ភព​ និង​ ផ្សេងៗ​ទៀត</label>
         <textarea name="obstetric_other_complications" class="form-control" id="obstetric_other_complications" rows="3">{{ request.form.get('obstetric_other_complications', default='') or diagnosis['obstetric_other_complications'] }}</textarea>
       </div>
 
     {% else %}
 
       <div class="mb-3">
-        <label for="weight" class="form-label">Mother's Weight (kg)</label>
+        <label for="weight" class="form-label">Mother's Weight ទម្ងន់របស់ម្តាយ (kg)</label>
         <input type="text" name="weight" class="form-control" id="weight" value="{{ request.form.get('weight', default='') or diagnosis['weight'] }}">
       </div>
 
       <div class="mb-3">
-        <label for="gestation" class="form-label">Gestation (weeks)</label>
+        <label for="gestation" class="form-label">Gestation (weeks) អាយុគភ៌ (សប្តាហ៏)</label>
         <input type="text" name="gestation" class="form-control" id="gestation" value="{{ request.form.get('gestation', default='') or diagnosis['gestation'] }}">
       </div>
 
       <div class="mb-3">
-        <label for="blood_pressure" class="form-label">Blood Pressure</label>
+        <label for="blood_pressure" class="form-label">Blood Pressure (Systolic/Diastolic) វាស់សម្ពាធឈាម</label>
         <input type="text" name="blood_pressure" class="form-control" id="blood_pressure" value="{{ request.form.get('blood_pressure', default='') or diagnosis['blood_pressure'] }}">
       </div>
 
       <div class="mb-3">
-        <label for="fetal_assessment" class="form-label">Simple Assessment of Fetus</label>
+        <label for="fetal_assessment" class="form-label">Simple Assessment of Fetus ការវាយតម្លៃលើទារក</label>
         <textarea name="fetal_assessment" class="form-control" id="fetal_assessment" rows="3">{{ request.form.get('fetal_assessment', default='') or diagnosis['fetal_assessment'] }}</textarea>
       </div>
 
       <div class="mb-3">
-        <label for="fetal_heartbeat" class="form-label">Fetal Heartbeat</label>
+        <label for="fetal_heartbeat" class="form-label">Fetal Heartbeat ចង្វាក់បេះដូងទារក</label>
         <input type="text" name="fetal_heartbeat" class="form-control" id="fetal_heartbeat" value="{{ request.form.get('fetal_heartbeat', default='') or diagnosis['fetal_heartbeat'] }}">
       </div>
 
       <div class="mb-3">
-        <label for="symphysiofundal_height" class="form-label">Symphysiofundal Height</label>
+        <label for="symphysiofundal_height" class="form-label">Symphysiofundal Height វាស់កម្ពស់ស្បូន</label>
         <input type="text" name="symphysiofundal_height" class="form-control" id="symphysiofundal_height" value="{{ request.form.get('symphysiofundal_height', default='') or diagnosis['symphysiofundal_height'] }}">
       </div>
 
       <div class="mb-3">
-        <label for="complications" class="form-label">Complications</label>
+        <label for="complications" class="form-label">Complications មានផលវិបាកផ្សេងថ្មីទៀត</label>
         <textarea name="complications" class="form-control" id="complications" rows="3">{{ request.form.get('complications', default='') or diagnosis['complications'] }}</textarea>
       </div>
 
       <div class="mb-3">
-        <label for="urine_dipstick" class="form-label">Urine Dipstick Test</label>
+        <label for="urine_dipstick" class="form-label">Urine Dipstick Test ការធ្វើតេស្តទឺកនោម</label>
         <input type="checkbox" name="urine_dipstick" id="urine_dipstick" value="true" {{ 'checked' if diagnosis['urine_dipstick'] else '' }}>
       </div>
 
       <div class="mb-3">
-        <label for="vaccination" class="form-label">Vaccination Administered</label>
+        <label for="vaccination" class="form-label">Vaccination Administered តើមានការ ចាក់វ៉ាក់សុាំងឬអត់</label>
         <input type="checkbox" name="vaccination" id="vaccination" value="true" {{ 'checked' if diagnosis['vaccination'] else '' }}>
       </div>
 
       <div class="mb-3">
-        <label for="folic_acid" class="form-label">Dispensed folic acid</label>
+        <label for="folic_acid" class="form-label">Dispensed folic acid តើ​មានការលេបថ្នាំជាតិដែក (​ហ្វូលិកអាសុីត) ឬអត់?</label>
         <input type="checkbox" name="folic_acid" id="folic_acid" value="true" {{ 'checked' if diagnosis['folic_acid'] else '' }}>
       </div>
 
       <div class="mb-3">
-        <label for="mendabazole" class="form-label">Dispensed mendabazole</label>
+        <label for="mendabazole" class="form-label">Dispensed mendabazole តើមាន​​ ប្រើថ្នាំទំលាក់ព្រូនឬទេ?</label>
         <input type="checkbox" name="mendabazole" id="mendabazole" value="true" {{ 'checked' if diagnosis['mendabazole'] else '' }}>
       </div>
 
       <div class="mb-3">
-        <label for="hepatitis" class="form-label">Hepatitis Test</label>
+        <label for="hepatitis" class="form-label">Hepatitis Test ការធ្វើតេស្តរកមេរោគ រលាកថ្លើម</label>
         <input type="checkbox" name="hepatitis" id="hepatitis" value="true" {{ 'checked' if diagnosis['hepatitis'] else '' }}>
       </div>
 
     {% endif %}
 
 
-    <button type="submit" class="btn btn-primary">Update</button>
-    <a class="btn btn-secondary" href="{{ url_for('patient.view_patient_anc', patient_id=diagnosis['patient_id']) }}">Back</a>
-    <button id="delete_trigger" class="btn btn-danger float-end" type="submit" onclick="return deleteDiagnosis()">Delete</button>
+    <button type="submit" class="btn btn-primary">Update ធ្វើបច្ចុប្បន្នភាព</button>
+    <a class="btn btn-secondary" href="{{ url_for('patient.view_patient_anc', patient_id=diagnosis['patient_id']) }}">Back ត្រឡប់ទៅវិញ។</a>
+    <button id="delete_trigger" class="btn btn-danger float-end" type="submit" onclick="return deleteDiagnosis()">Delete លុប</button>
   </form>
   <hr>
 

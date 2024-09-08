@@ -8,9 +8,9 @@
     <div class="col-6">
       <div class="my-3 d-grid gap-2 d-flex justify-content-end">
         {% if g.user.id == diagnosis['author_id'] %}
-          <a class="btn btn-primary" href="{{ url_for('diagnosis.update_anc', diagnosis_id=diagnosis['id']) }}">Edit</a>
+          <a class="btn btn-primary" href="{{ url_for('diagnosis.update_anc', diagnosis_id=diagnosis['id']) }}">Edit កែសម្រួល</a>
         {% endif %}
-        <a class="btn btn-secondary" href="{{ url_for('patient.view_patient_anc', patient_id=patient.id) }}">Back</a>
+        <a class="btn btn-secondary" href="{{ url_for('patient.view_patient_anc', patient_id=patient.id) }}">Back ត្រឡប់ទៅវិញ។</a>
       </div>
     </div>
   </div>
@@ -18,39 +18,39 @@
 
 {% block content %}
   <div>
-    <p>Sex: {{ patient['sex'] }}</p>
-    <p>DOB: {{ patient['date_of_birth'] }}</p>
-    <p>Phone: {{ patient['phone'] }}</p>
-    <p>Address: {{ patient['address'] }}</p>
+    <p>Sex ភេទ: {{ patient['sex'] }}</p>
+    <p>DOB ថ្ងៃខែឆ្នាំកំណើត: {{ patient['date_of_birth'] }}</p>
+    <p>Phone លេខ​ទូរស័ព្ទ: {{ patient['phone'] }}</p>
+    <p>Address អាសយដ្ឋាន: {{ patient['address'] }}</p>
   </div>
 
   <hr>
 
   {% if diagnosis['compulsory'] %}
-    <h3 class="fs2-text">Main Entry</h3>
-    <p>Expected Date of Delivery: {{ diagnosis['expected_delivery_date'] }}</p>
-    <p>Termination of Pregnancy: {{ diagnosis['terminate'] }}</p>
-    <p>Mother's Height (cm): {{ diagnosis['height'] }}</p>
-    <p>Last Menstrual Period: {{ diagnosis['last_menstrual_period'] }}</p>
-    <p>Parity: {{ diagnosis['parity'] }}</p>
-    <p>Number of Living Children: {{ diagnosis['living_children'] }}</p>
-    <p>Gravida: {{ diagnosis['gravida'] }}</p>
-    <p>Medical and Surgical Complications: {{ diagnosis['medical_surgical_complications'] }}</p>
-    <p>Obstetric & Other Complications: {{ diagnosis['obstetric_other_complications'] }}</p>
+    <h3 class="fs2-text">Main Entry ធាតុសំខាន់</h3>
+    <p>Expected Date of Delivery ថ្ងៃសម្រាលរំពឺងទុក: {{ diagnosis['expected_delivery_date'] }}</p>
+    <p>Termination of Pregnancy ការបញ្ចប់គភ៌ចុងក្រោយ: {{ diagnosis['terminate'] }}</p>
+    <p>Mother's Height កម្ពស់របស់ម្តាយ (cm): {{ diagnosis['height'] }}</p>
+    <p>Last Menstrual Period ថ្ងៃមករដូវចុងក្រោយ: {{ diagnosis['last_menstrual_period'] }}</p>
+    <p>Parity ចំនួនសម្រាល (រួមទាំងទារកបច្ចុប្បន្ន): {{ diagnosis['parity'] }}</p>
+    <p>Number of Living Children ចំនួនកូននៅរស់: {{ diagnosis['living_children'] }}</p>
+    <p>Gravida ចំនួនពរពោះ (​រួមទាំងការពរពោះបច្ចុប្បន្ន): {{ diagnosis['gravida'] }}</p>
+    <p>Medical and Surgical Complications ការត្រៀម ប្រឈមនូវផលវិបាក វេជ្ជសាស្រ្ត​ និង​ ការវះកាត់: {{ diagnosis['medical_surgical_complications'] }}</p>
+    <p>Obstetric & Other Complications ការត្រៀមប្រឈមនូវផលវិបាក សម្ភព​ និង​ ផ្សេងៗ​ទៀត: {{ diagnosis['obstetric_other_complications'] }}</p>
   {% else %}
-    <h3 class="fs2-text">Visit Update</h3>
-    <p>Mother's Weight (kg): {{ diagnosis['weight'] }}</p>
-    <p>Gestation (weeks): {{ diagnosis['gestation'] }}</p>
-    <p>Blood Pressure: {{ diagnosis['blood_pressure'] }}</p>
-    <p>Urine Dipstick Test: {{ diagnosis['urine_dipstick'] }}</p>
-    <p>Assessment of Fetus: {{ diagnosis['fetal_assessment'] }}</p>
-    <p>Fetal Heartbeat: {{ diagnosis['fetal_heartbeat'] }}</p>
-    <p>Symphysiofundal Height: {{ diagnosis['symphysiofundal_height'] }}</p>
-    <p>Complications: {{ diagnosis['complications'] }}</p>
-    <p>Vaccination Administered: {{ diagnosis['vaccination'] }}</p>
-    <p>Dispensed Folic Acid: {{ diagnosis['folic_acid'] }}</p>
-    <p>Dispensed Mendabazole: {{ diagnosis['mendabazole'] }}</p>
-    <p>Hepatitis Test: {{ diagnosis['hepatitis'] }}</p>
+    <h3 class="fs2-text">Visit Update ទស្សនាបច្ចុប្បន្នភាព</h3>
+    <p>Mother's Weight ទម្ងន់របស់ម្តាយ (kg): {{ diagnosis['weight'] }}</p>
+    <p>Gestation (weeks) អាយុគភ៌ (សប្តាហ៏): {{ diagnosis['gestation'] }}</p>
+    <p>Blood Pressure វាស់សម្ពាធឈាម: {{ diagnosis['blood_pressure'] }}</p>
+    <p>Urine Dipstick Test ការធ្វើតេស្តទឺកនោម: {{ diagnosis['urine_dipstick'] }}</p>
+    <p>Assessment of Fetus ការវាយតម្លៃលើទារក: {{ diagnosis['fetal_assessment'] }}</p>
+    <p>Fetal Heartbeat ចង្វាក់បេះដូងទារក: {{ diagnosis['fetal_heartbeat'] }}</p>
+    <p>Symphysiofundal Height វាស់កម្ពស់ស្បូន: {{ diagnosis['symphysiofundal_height'] }}</p>
+    <p>Complications មានផលវិបាកផ្សេងថ្មីទៀត: {{ diagnosis['complications'] }}</p>
+    <p>Vaccination Administered តើមានការ ចាក់វ៉ាក់សុាំងឬអត់: {{ diagnosis['vaccination'] }}</p>
+    <p>Dispensed Folic Acid តើ​មានការលេបថ្នាំជាតិដែក (​ហ្វូលិកអាសុីត) ឬអត់: {{ diagnosis['folic_acid'] }}</p>
+    <p>Dispensed Mendabazole តើមាន​​ ប្រើថ្នាំទំលាក់ព្រូនឬទេ: {{ diagnosis['mendabazole'] }}</p>
+    <p>Hepatitis Test ការធ្វើតេស្តរកមេរោគ រលាកថ្លើម: {{ diagnosis['hepatitis'] }}</p>
   {% endif %}
   <hr>
 {% endblock %}

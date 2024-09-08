@@ -8,9 +8,9 @@
     <div class="col-6">
       <div class="my-3 d-grid gap-2 d-flex justify-content-end">
         {% if g.user.id == diagnosis['author_id'] %}
-          <a class="btn btn-primary" href="{{ url_for('diagnosis.update_ldr', diagnosis_id=diagnosis['id']) }}">Edit</a>
+          <a class="btn btn-primary" href="{{ url_for('diagnosis.update_ldr', diagnosis_id=diagnosis['id']) }}">Edit កែសម្រួល</a>
         {% endif %}
-        <a class="btn btn-secondary" href="{{ url_for('patient.view_patient_ldr', patient_id=patient.id) }}">Back</a>
+        <a class="btn btn-secondary" href="{{ url_for('patient.view_patient_ldr', patient_id=patient.id) }}">Back ត្រឡប់ទៅវិញ។</a>
       </div>
     </div>
   </div>
@@ -18,44 +18,44 @@
 
 {% block content %}
   <div>
-    <p>Sex: {{ patient['sex'] }}</p>
-    <p>DOB: {{ patient['date_of_birth'] }}</p>
-    <p>Phone: {{ patient['phone'] }}</p>
-    <p>Address: {{ patient['address'] }}</p>
+    <p>Sex ភេទ: {{ patient['sex'] }}</p>
+    <p>DOB ថ្ងៃខែឆ្នាំកំណើត: {{ patient['date_of_birth'] }}</p>
+    <p>Phone លេខ​ទូរស័ព្ទ: {{ patient['phone'] }}</p>
+    <p>Address អាសយដ្ឋាន: {{ patient['address'] }}</p>
   </div>
 
   <hr>
-  <h3 class="fs2-text">Labour and Delivery</h3>
+  <h3 class="fs2-text">Labour and Delivery ការងារ និងការដឹកជញ្ជូន</h3>
 
-  <p>Labour Onset: {{ diagnosis['labour_onset'] }}</p>
-  <p>Membranes Ruptured: {{ diagnosis['membranes_ruptured'] }}</p>
-  <p>Duration of 2nd stage (min): {{ diagnosis['duration_2nd_stage'] }}</p>
-  <p>Duration of 3rd stage (min): {{ diagnosis['duration_3rd_stage'] }}</p>
-  <p>Placenta Delivery: {{ diagnosis['placenta_delivery'] }}</p>
-  <p>Placenta Complete: {{ diagnosis['placenta_complete'] }}</p>
-  <p>Membranes Complete: {{ diagnosis['membranes_complete'] }}</p>
-  <p>Placenta Weight (g): {{ diagnosis['placenta_weight'] }}</p>
-  <p>Blood loss during delivery (ml): {{ diagnosis['blood_loss'] }}</p>
-  <p>Shoulder Dystocia: {{ diagnosis['shoulder_dystocia'] }}</p>
-  <p>3rd Degree Tear: {{ diagnosis['tear'] }}</p>
-  <p>Uterine Rupture: {{ diagnosis['ulterine_rupture'] }}</p>
-  <p>Obsteric Hysterectomy: {{ diagnosis['obsteric_hysterectomy'] }}</p>
-  <p>Other comments: {{ diagnosis['comments'] }}</p>
-  <p>Attendant: {{ diagnosis['attendent'] }}</p>
-  <p>Other Delivery Method: {{ diagnosis['other_delivery_method'] }}</p>
-  <p>Liquor at Delivery: {{ diagnosis['delivery_liquor'] }}</p>
+  <p>Labour Onset ការចាប់ផ្តើមឈឺពោះ: {{ diagnosis['labour_onset'] }}</p>
+  <p>Membranes Ruptured បែកស្រោមទឺកភ្លោះ: {{ diagnosis['membranes_ruptured'] }}</p>
+  <p>Duration of 2nd stage រយះពេលនៃដំណាក់កាលទី ២ (minutes): {{ diagnosis['duration_2nd_stage'] }}</p>
+  <p>Duration of 3rd stage រយះពេលនៃដំណាក់កាលទី ៣ (minutes): {{ diagnosis['duration_3rd_stage'] }}</p>
+  <p>Placenta Delivery ការទំលាក់សុក: {{ diagnosis['placenta_delivery'] }}</p>
+  <p>Placenta Complete សុក: {{ diagnosis['placenta_complete'] }}</p>
+  <p>Membranes Complete នៅសល់បំណែកសុក: {{ diagnosis['membranes_complete'] }}</p>
+  <p>Placenta Weight ទំងន់របស់សុក (g): {{ diagnosis['placenta_weight'] }}</p>
+  <p>Blood loss during delivery បាត់បង់ឈាមកំឡុងពេលសម្រាលកូន (ml): {{ diagnosis['blood_loss'] }}</p>
+  <p>Shoulder Dystocia ទំរង់កូនជាប់ស្មា: {{ diagnosis['shoulder_dystocia'] }}</p>
+  <p>3rd Degree Tear ការរហែកស្បូនកំរិត​ ៣: {{ diagnosis['tear'] }}</p>
+  <p>Uterine Rupture រហែកស្បូន: {{ diagnosis['ulterine_rupture'] }}</p>
+  <p>Obsteric Hysterectomy ការកាត់ស្បូនយកចេញ: {{ diagnosis['obsteric_hysterectomy'] }}</p>
+  <p>Other Comments មតិ: {{ diagnosis['comments'] }}</p>
+  <p>Attendant ជំនួយការ: {{ diagnosis['attendent'] }}</p>
+  <p>Other Delivery Method ការសម្រាលដោយវិធីផ្សេងទៀត: {{ diagnosis['other_delivery_method'] }}</p>
+  <p>Liquor at Delivery ទឺកភ្លោះពេលសម្រាល: {{ diagnosis['delivery_liquor'] }}</p>
 
   <hr>
-  <h3 class="fs2-text">Infant Information</h3>
+  <h3 class="fs2-text">Infant Information ព័ត៌មានទារក</h3>
 
-  <p>Name of Baby: {{ diagnosis['name'] }}</p>
-  <p>Date of Delivery : {{ diagnosis['delivery_date'] }}</p>
-  <p>Sex of Baby: {{ diagnosis['sex'] }}</p>
-  <p>Condition of Baby: {{ diagnosis['condition'] }}</p>
-  <p>Weight of Baby (g): {{ diagnosis['weight'] }}</p>
-  <p>Length of Baby (cm): {{ diagnosis['length'] }}</p>
-  <p>Head Circumference of Baby (cm): {{ diagnosis['head_circumference'] }}</p>
-  <p>Death Date and Time: {{ diagnosis['death_time'] }}</p>
+  <p>Name of Baby ឈ្មោះរបស់ទារក: {{ diagnosis['name'] }}</p>
+  <p>Date of Delivery ថ្ងៃសម្រាល: {{ diagnosis['delivery_date'] }}</p>
+  <p>Sex of Baby ភេទរបស់ទារក: {{ diagnosis['sex'] }}</p>
+  <p>Condition of Baby លក្ខណ្ឌនៃទារក: {{ diagnosis['condition'] }}</p>
+  <p>Weight of Baby ទំងន់របស់ទារក (g): {{ diagnosis['weight'] }}</p>
+  <p>Length of Baby ប្រវែងរបស់ទារក (cm): {{ diagnosis['length'] }}</p>
+  <p>Head Circumference of Baby បរិមាត្រក្បាលរបស់ទារក (cm): {{ diagnosis['head_circumference'] }}</p>
+  <p>Death Date and Time ថ្ងៃ នឺង ពេលវេលា​ ស្លាប់: {{ diagnosis['death_time'] }}</p>
 
   <hr>
 {% endblock %}
