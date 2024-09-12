@@ -24,8 +24,84 @@
     <p>Parity ចំនួនសម្រាល (រួមទាំងទារកបច្ចុប្បន្ន): {{ current_info['parity'] }}</p>
     <p>Number of Living Children ចំនួនកូននៅរស់: {{ current_info['living_children'] }}</p>
     <p>Gravida ចំនួនពរពោះ: {{ current_info['gravida'] }}</p>
-    <p>Medical and Surgical Complications ការត្រៀម ប្រឈមនូវផលវិបាក វេជ្ជសាស្រ្ត​ និង​ ការវះកាត់: {{ current_info['medical_surgical_complications'] }}</p>
-    <p>Obstetric & Other Complications ការត្រៀមប្រឈមនូវផលវិបាក សម្ភព​ និង​ ផ្សេងៗ​ទៀត: {{ current_info['obstetric_other_complications'] }}</p>
+    <p>Medical and Surgical Complications ការត្រៀម ប្រឈមនូវផលវិបាក វេជ្ជសាស្រ្ត​ និង​ ការវះកាត់:
+      {% if current_info['medical_surgical_complications'] == '1' %}
+          Essential Hypertension ជំងឺលើសសម្ពាធឈាម
+      {% elif current_info['medical_surgical_complications'] == '2' %}
+          Pre-eclampsia ជំងឺបម្រុងក្រឡាភ្លើង
+      {% elif current_info['medical_surgical_complications'] == '3' %}
+          Pregnancy-induced Hypertension ការមានផ្ទៃពោះបណ្តាលអោយមានជំងឺលើសសម្ពាធឈាម
+      {% elif current_info['medical_surgical_complications'] == '4' %}
+          Eclampsia ជំងឺក្រឡាភ្លើង
+      {% elif current_info['medical_surgical_complications'] == '5' %}
+          Renal Disease ជំងឺតម្រងនោម
+      {% elif current_info['medical_surgical_complications'] == '6' %}
+          Existing Diabetes ជំងឺទឺកនោមផ្អែមពីកំណើត
+      {% elif current_info['medical_surgical_complications'] == '7' %}
+          Impaired GTT បម្រែបម្រួល​ ការធ្វើតេស្តស្ករ​ (GTT)
+      {% elif current_info['medical_surgical_complications'] == '8' %}
+          Diabetes ជំងឺទឺកនោមផ្អែម
+      {% elif current_info['medical_surgical_complications'] == '9' %}
+          Anaemia (<10gm%) ជំងឺស្លេកស្លាំង(<10gm%)
+      {% elif current_info['medical_surgical_complications'] == '10' %}
+          Thyrotoxicosis ជំងឺឡើងជាតិពុលនៅក្រពេញក
+      {% elif current_info['medical_surgical_complications'] == '11' %}
+          Cardiac Disease ជំងឺបេះដូង
+      {% elif current_info['medical_surgical_complications'] == '12' %}
+          STD (Syphilis/Warts/AIDS etc.) ជំងឺកាមរោគ(មេរោគស្វាយ/ឬស/មេរោគអេដស៏ និង ផ្សេងទៀត)
+      {% elif current_info['medical_surgical_complications'] == '13' %}
+          Urinary Tract Infection ការបង្កររោគនៅផ្លូវទឺកនោម
+      {% elif current_info['medical_surgical_complications'] == '14' %}
+          Uterine and Cervical Surgery ការវះកាត់ ស្បូន នឹង មាត់ស្បូន
+      {% elif current_info['medical_surgical_complications'] == '15' %}
+          SLE/Other Autoimmune Diseases ជំងឺលុយពីស/ជំងឺប្រឆាំងនឹងប្រព័ន្ធការពារខ្លួនឯង
+      {% elif current_info['medical_surgical_complications'] == '16' %}
+          Hypothyroidism ជំងឺថយចុះជាតិអុីយ៉ូត
+      {% elif current_info['medical_surgical_complications'] == '17' %}
+          Other Medical Complications (Specify) ផលវិបាកសុខភាពដទៃផ្សេងទៀត
+      {% else %}
+          Not Specified
+      {% endif %}
+    </p>
+    <p>Obstetric & Other Complications ការត្រៀមប្រឈមនូវផលវិបាក សម្ភព​ និង​ ផ្សេងៗ​ទៀត:
+        {% if current_info['obstetric_other_complications'] == '1' %}
+            Previous CS ការវះកាត់យកកូនពីមុន
+        {% elif current_info['obstetric_other_complications'] == '2' %}
+            Preterm Labour (present pregnancy) ការឈឺពោះមិនគ្រប់ខែ(ការពរពោះបច្ចុប្បន្ន)
+        {% elif current_info['obstetric_other_complications'] == '3' %}
+            Placenta Praevia សុកពាំងមាត់ស្បូន
+        {% elif current_info['obstetric_other_complications'] == '4' %}
+            Other APH ការធ្លាក់ឈាមពេលមានផ្ទៃពោះ ផ្សេងទៀត
+        {% elif current_info['obstetric_other_complications'] == '5' %}
+            IUGR/Suspected IUGR កូនលូតលាស់មិនគ្រប់គីឡូ/ សង្ស័យ កូនលូតលាស់មិនគ្រប់គីឡូ
+        {% elif current_info['obstetric_other_complications'] == '6' %}
+            Polyhydramnios ទឹកភ្លោះច្រើន
+        {% elif current_info['obstetric_other_complications'] == '7' %}
+            Previous Neonatal ទាក់ទងនឹង ទារកទើបនឹងកើតពីមុន
+        {% elif current_info['obstetric_other_complications'] == '8' %}
+            Recurrent Abortion ការរំលូតកូនថ្មីឡើងវិញទៀត
+        {% elif current_info['obstetric_other_complications'] == '9' %}
+            Foetal Anomalies ទម្រង់ទារកមិនប្រក្រតី
+        {% elif current_info['obstetric_other_complications'] == '10' %}
+            Breech ទម្រង់ទារកហុចគូទ
+        {% elif current_info['obstetric_other_complications'] == '11' %}
+            Brow ទម្រង់ទារកបង្ហាញថ្ងាស
+        {% elif current_info['obstetric_other_complications'] == '12' %}
+            Face ទម្រង់ទារកបង្ហាញមុខ
+        {% elif current_info['obstetric_other_complications'] == '13' %}
+            Oblique/Traverse Lie ទម្រង់ទារកកាត់ទទឹង/កាត់បណ្តោយ
+        {% elif current_info['obstetric_other_complications'] == '14' %}
+            Twins កូនភ្លោះ២
+        {% elif current_info['obstetric_other_complications'] == '15' %}
+            Triplets កូនភ្លោះ៣
+        {% elif current_info['obstetric_other_complications'] == '16' %}
+            Other Multiple Pregnancies ការពរពោះច្រើនដង
+        {% elif current_info['obstetric_other_complications'] == '17' %}
+            Other Medical Complications (Specify) ផលវិបាកសុខភាពដទៃផ្សេងទៀត
+        {% else %}
+            Not Specified
+        {% endif %}
+    </p>
   </div>
   <div>
   {% for d in diagnosis %}

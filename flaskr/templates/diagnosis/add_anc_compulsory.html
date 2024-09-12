@@ -44,12 +44,50 @@
 
     <div class="mb-3">
       <label for="medical_surgical_complications" class="form-label">Medical and Surgical Complications ការត្រៀម ប្រឈមនូវផលវិបាក វេជ្ជសាស្រ្ត​ និង​ ការវះកាត់</label>
-      <textarea name="medical_surgical_complications" class="form-control" id="medical_surgical_complications" rows="3">{{ request.form.get('medical_surgical_complications', default='') }}</textarea>
+      <select id="medical_surgical_complications" name="medical_surgical_complications" class="form-select" >
+        <option value="0" {% if request.form.get('medical_surgical_complications', default='') == '0' %} selected {% endif %}></option>
+        <option value="1" {% if request.form.get('medical_surgical_complications', default='') == '1' %} selected {% endif %}>Essential Hypertension ជំងឺលើសសម្ពាធឈាម</option>
+        <option value="2" {% if request.form.get('medical_surgical_complications', default='') == '2' %} selected {% endif %}>Pre-eclampsia ជំងឺបម្រុងក្រឡាភ្លើង</option>
+        <option value="3" {% if request.form.get('medical_surgical_complications', default='') == '3' %} selected {% endif %}>Pregnancy-induced Hypertension ការមានផ្ទៃពោះបណ្តាលអោយមានជំងឺលើសសម្ពាធឈាម</option>
+        <option value="4" {% if request.form.get('medical_surgical_complications', default='') == '4' %} selected {% endif %}>Eclampsia ជំងឺក្រឡាភ្លើង</option>
+        <option value="5" {% if request.form.get('medical_surgical_complications', default='') == '5' %} selected {% endif %}>Renal Disease ជំងឺតម្រងនោម</option>
+        <option value="6" {% if request.form.get('medical_surgical_complications', default='') == '6' %} selected {% endif %}>Existing Diabetes ជំងឺទឺកនោមផ្អែមពីកំណើត</option>
+        <option value="7" {% if request.form.get('medical_surgical_complications', default='') == '7' %} selected {% endif %}>Impared GTT បម្រែបម្រួល​ ការធ្វើតេស្តស្ករ​ (GTT)</option>
+        <option value="8" {% if request.form.get('medical_surgical_complications', default='') == '8' %} selected {% endif %}>Diabetes ជំងឺទឺកនោមផ្អែម</option>
+        <option value="9" {% if request.form.get('medical_surgical_complications', default='') == '9' %} selected {% endif %}>Anaemia (<10gm%) ជំងឺស្លេកស្លាំង(<10gm%)</option>
+        <option value="10" {% if request.form.get('medical_surgical_complications', default='') == '10' %} selected {% endif %}>Thyrotoxicosis ជំងឺឡើងជាតិពុលនៅក្រពេញក</option>
+        <option value="11" {% if request.form.get('medical_surgical_complications', default='') == '11' %} selected {% endif %}>Cardiac Disease ជំងឺបេះដូង</option>
+        <option value="12" {% if request.form.get('medical_surgical_complications', default='') == '12' %} selected {% endif %}>STD (Syphilis/Warts/AIDS etc.) ជំងឺកាមរោគ(មេរោគស្វាយ/ឬស/មេរោគអេដស៏ និង ផ្សេងទៀត)</option>
+        <option value="13" {% if request.form.get('medical_surgical_complications', default='') == '13' %} selected {% endif %}>Urinary Tract Infection ការបង្កររោគនៅផ្លូវទឺកនោម</option>
+        <option value="14" {% if request.form.get('medical_surgical_complications', default='') == '14' %} selected {% endif %}>Uterine and Cervical Surgery ការវះកាត់ ស្បូន នឹង មាត់ស្បូន</option>
+        <option value="15" {% if request.form.get('medical_surgical_complications', default='') == '15' %} selected {% endif %}>SLE/Other Autoimmune Diseases ជំងឺលុយពីស/ជំងឺប្រឆាំងនឹងប្រព័ន្ធការពារខ្លួនឯង</option>
+        <option value="16" {% if request.form.get('medical_surgical_complications', default='') == '16' %} selected {% endif %}>Hypothyroidism ជំងឺថយចុះជាតិអុីយ៉ូត</option>
+        <option value="17" {% if request.form.get('medical_surgical_complications', default='') == '17' %} selected {% endif %}>Other Medical Compications (Specify) ផលវិបាកសុខភាពដទៃផ្សេងទៀត</option>
+      </select>
     </div>
 
     <div class="mb-3">
       <label for="obstetric_other_complications" class="form-label">Obstetric and Other Complications ការត្រៀមប្រឈមនូវផលវិបាក សម្ភព​ និង​ ផ្សេងៗ​ទៀត</label>
-      <textarea name="obstetric_other_complications" class="form-control" id="obstetric_other_complications" rows="3">{{ request.form.get('obstetric_other_complications', default='') }}</textarea>
+      <select id="obstetric_other_complications" name="obstetric_other_complications" class="form-select" >
+        <option value="0" {% if request.form.get('obstetric_other_complications', default='') == '0' %} selected {% endif %}></option>
+        <option value="1" {% if request.form.get('obstetric_other_complications', default='') == '1' %} selected {% endif %}>Previous CS ការវះកាត់យកកូនពីមុន</option>
+        <option value="2" {% if request.form.get('obstetric_other_complications', default='') == '2' %} selected {% endif %}>Preterm Labour (present pregnancy) ការឈឺពោះមិនគ្រប់ខែ(ការពរពោះបច្ចុប្បន្ន)</option>
+        <option value="3" {% if request.form.get('obstetric_other_complications', default='') == '3' %} selected {% endif %}>Placenta Praevia សុកពាំងមាត់ស្បូន</option>
+        <option value="4" {% if request.form.get('obstetric_other_complications', default='') == '4' %} selected {% endif %}>Other APH ការធ្លាក់ឈាមពេលមានផ្ទៃពោះ ផ្សេងទៀត</option>
+        <option value="5" {% if request.form.get('obstetric_other_complications', default='') == '5' %} selected {% endif %}>IUGR/Suspected IUGR កូនលូតលាស់មិនគ្រប់គីឡូ/ សង្ស័យ កូនលូតលាស់មិនគ្រប់គីឡូ</option>
+        <option value="6" {% if request.form.get('obstetric_other_complications', default='') == '6' %} selected {% endif %}>Polyhydramnios ទឹកភ្លោះច្រើន</option>
+        <option value="7" {% if request.form.get('obstetric_other_complications', default='') == '7' %} selected {% endif %}>Previous Neonatal ទាក់ទងនឹង ទារកទើបនឹងកើតពីមុន</option>
+        <option value="8" {% if request.form.get('obstetric_other_complications', default='') == '8' %} selected {% endif %}>Recurrent Abortion ការរំលូតកូនថ្មីឡើងវិញទៀត</option>
+        <option value="9" {% if request.form.get('obstetric_other_complications', default='') == '9' %} selected {% endif %}>Foetal Anomalies ទម្រង់ទារកមិនប្រក្រតី</option>
+        <option value="10" {% if request.form.get('obstetric_other_complications', default='') == '10' %} selected {% endif %}>Breech ទម្រង់ទារកហុចគូទ</option>
+        <option value="11" {% if request.form.get('obstetric_other_complications', default='') == '11' %} selected {% endif %}>Brow ទម្រង់ទារកបង្ហាញថ្ងាស</option>
+        <option value="12" {% if request.form.get('obstetric_other_complications', default='') == '12' %} selected {% endif %}>Face ទម្រង់ទារកបង្ហាញមុខ</option>
+        <option value="13" {% if request.form.get('obstetric_other_complications', default='') == '13' %} selected {% endif %}>Oblique/Traverse Lie ទម្រង់ទារកកាត់ទទឹង/កាត់បណ្តោយ</option>
+        <option value="14" {% if request.form.get('obstetric_other_complications', default='') == '14' %} selected {% endif %}>Twins កូនភ្លោះ២</option>
+        <option value="15" {% if request.form.get('obstetric_other_complications', default='') == '15' %} selected {% endif %}>Triplets កូនភ្លោះ៣</option>
+        <option value="16" {% if request.form.get('obstetric_other_complications', default='') == '16' %} selected {% endif %}>Other Multiple Pregnancies ការពរពោះច្រើនដង</option>
+        <option value="17" {% if request.form.get('obstetric_other_complications', default='') == '17' %} selected {% endif %}>Other Medical Compications (Specify) ផលវិបាកសុខភាពដទៃផ្សេងទៀត</option>
+      </select>
     </div>
 
     <button type="submit" class="btn btn-primary">Create បង្កើត</button>
