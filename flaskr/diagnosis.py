@@ -530,8 +530,8 @@ def get_anc(diagnosis_id, check_author=True):
     if diagnosis is None:
         abort(404, f"Patient id {diagnosis_id} doesn't exist.")
 
-    if check_author and diagnosis.author_id != g.user.id:
-        abort(403)
+    # if check_author and diagnosis.author_id != g.user.id:
+    #     abort(403)
 
     return diagnosis
 
@@ -541,8 +541,8 @@ def get_ldr(diagnosis_id, check_author=True):
     if diagnosis is None:
         abort(404, f"Patient id {diagnosis_id} doesn't exist.")
 
-    if check_author and diagnosis.author_id != g.user.id:
-        abort(403)
+    # if check_author and diagnosis.author_id != g.user.id:
+    #     abort(403)
 
     return diagnosis
 
@@ -552,7 +552,7 @@ def get_pnc(diagnosis_id, check_author=True):
     if diagnosis is None:
         abort(404, f"Patient id {diagnosis_id} doesn't exist.")
 
-    if check_author and diagnosis.author_id != g.user.id:
-        abort(403)
+    # if check_author and diagnosis.author_id != g.user.id:
+    #     abort(403)
 
     return diagnosis
